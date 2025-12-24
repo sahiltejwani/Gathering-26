@@ -9,6 +9,7 @@ import Events from './pages/Events'
 import Sports from './pages/Sports'
 import Team from './pages/Team'
 import Passes from './pages/Passes'
+import Gallery from './pages/Gallery'
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/events" element={<Events />} />
         <Route path="/sports" element={<Sports />} />
         <Route path="/team" element={<Team />} />
+        <Route path="/gallery" element={<Gallery />} />
         <Route path="/passes" element={<Passes />} />
       </Routes>
 
