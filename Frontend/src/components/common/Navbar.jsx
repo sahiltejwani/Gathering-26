@@ -75,6 +75,20 @@ export default function Navbar() {
 
           <li>
             <NavLink
+              to="/gallery"
+              className={({ isActive }) =>
+                `text-lg font-medium transition duration-200 
+                ${isActive 
+                  ? "text-blue-400 border-b-2 border-blue-400 pb-1" 
+                  : "text-white/80 hover:text-blue-400"}`
+              }
+            >
+              Gallery
+            </NavLink>
+          </li>
+
+          <li>
+            <NavLink
               to="/passes"
               className={({ isActive }) =>
                 `text-lg font-medium transition duration-200 
