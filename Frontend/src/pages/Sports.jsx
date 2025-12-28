@@ -26,7 +26,7 @@ const Sports = () => {
   ];
 
   return (
-    <div className="py-16 bg-gray-50 min-h-screen flex flex-col items-center">
+    <div className="py-16 min-h-screen flex flex-col items-center">
 
       <h3 className="text-center text-gray-600">- COEP GATHERING -</h3>
       <h1 className="text-center text-4xl font-bold text-orange-500 mb-10">

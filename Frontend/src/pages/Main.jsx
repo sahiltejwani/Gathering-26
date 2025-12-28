@@ -13,11 +13,11 @@ const Main = () => {
             <div className="" id='theme'>
                 <Theme />
             </div>
-            <div className="" id='events'>
-                <Events />
-            </div>
             <div className="" id='sports'>
                 <Sports />
+            </div>
+            <div className="" id='events'>
+                <Events />
             </div>
         </div>
     )
