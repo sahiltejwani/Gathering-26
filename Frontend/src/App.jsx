@@ -10,16 +10,17 @@ import Sports from './pages/Sports'
 import Team from './pages/Team'
 import Passes from './pages/Passes'
 import Gallery from './pages/Gallery'
+import Main from './pages/Main'
+import ScrollToHash from './components/common/ScrollToHash'
 
 function App() {
   return (
     <>
       <Navbar />
+      <ScrollToHash/>
 
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/events" element={<Events />} />
-        <Route path="/sports" element={<Sports />} />
+        <Route path="/" element={<Main />} />
         <Route path="/team" element={<Team />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/passes" element={<Passes />} />

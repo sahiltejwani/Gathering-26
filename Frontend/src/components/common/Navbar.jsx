@@ -2,12 +2,12 @@ import { Link, NavLink } from "react-router-dom";
 
 export default function Navbar() {
   return (
-    <nav className="w-full py-4 bg-black sticky top-0 z-50 shadow-md">
+    <nav className="fixed top-0 left-0 w-full py-4 bg-black z-50 shadow-md">
       <div className="w-[90%] mx-auto flex items-center justify-between">
 
         {/* Logo */}
         <Link
-          to="/"
+          to="/#home"
           className="text-white text-3xl font-bold tracking-wide"
         >
           GatherFest<span className="text-blue-400 font-extrabold">2025</span>
@@ -18,7 +18,7 @@ export default function Navbar() {
           
           <li>
             <NavLink
-              to="/"
+              to="/#home"
               end
               className={({ isActive }) =>
                 `text-lg font-medium transition duration-200 
@@ -33,7 +33,7 @@ export default function Navbar() {
 
           <li>
             <NavLink
-              to="/events"
+              to="/#events"
               className={({ isActive }) =>
                 `text-lg font-medium transition duration-200 
                 ${isActive 
@@ -47,7 +47,7 @@ export default function Navbar() {
 
           <li>
             <NavLink
-              to="/sports"
+              to="/#sports"
               className={({ isActive }) =>
                 `text-lg font-medium transition duration-200 
                 ${isActive 

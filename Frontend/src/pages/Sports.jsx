@@ -15,7 +15,7 @@ import img4 from "../images/pexels-fotios-photos-1279330.jpg";
 import img5 from "../images/pexels-janetrangdoan-1099680.jpg";
 import img6 from "../images/pexels-valeriya-842571.jpg";
 
-const Events = () => {
+const Sports = () => {
   const slides = [
     { img: img1, price: 20, name: "Special Pizza" },
     { img: img2, price: 20, name: "Meat Ball" },
@@ -95,4 +95,4 @@ const Events = () => {
   );
 };
 
-export default Events;
+export default Sports;
