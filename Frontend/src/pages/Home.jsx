@@ -31,12 +31,15 @@ const Home = () => {
     <div
       style={{
         width: "100%",
-        height: "calc(100vh)",
+        height: "100vh",
         position: "relative",
         overflow: "hidden",
-        backgroundColor: "black"
+        backgroundColor: "black",
+        maskImage: "linear-gradient(to bottom, black 80%, transparent)",
+        WebkitMaskImage: "linear-gradient(to bottom, black 80%, transparent)"
       }}
     >
+
       <div
         style={{
           position: "absolute",
