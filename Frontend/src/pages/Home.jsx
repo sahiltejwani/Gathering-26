@@ -7,9 +7,25 @@ const Home = () => {
   const [showTagline, setShowTagline] = useState(false);
   const [hasPlayedVideo, setHasPlayedVideo] = useState(false);
   const videoRef = useRef(null);
+  const mobileTimerRef = useRef(null);
 
   useEffect(() => {
     const videoPlayed = sessionStorage.getItem('homeVideoPlayed');
+
+    // Check if device is mobile based on screen width
+    const isMobile = () => {
+      return window.innerWidth <= 768;
+    };
+
+    if (isMobile() && videoRef.current) {
+      mobileTimerRef.current = setTimeout(() => {
+        if (videoRef.current) {
+          videoRef.current.pause();
+          sessionStorage.setItem('homeVideoPlayed', 'true');
+          setHasPlayedVideo(true);
+        }
+      }, 7000);
+    }
 
     if (videoPlayed === 'true') {
       setHasPlayedVideo(true);
@@ -44,12 +60,16 @@ const Home = () => {
 
     const taglineTimer = setTimeout(() => {
       setShowTagline(true);
-    }, 7000);
+    }, 6000);
 
     return () => {
       clearTimeout(fadeTimer);
       clearTimeout(logoTimer);
       clearTimeout(taglineTimer);
+      if (mobileTimerRef.current) {
+        clearTimeout(mobileTimerRef.current);
+      }
+
     };
   }, []);
 
@@ -59,6 +79,10 @@ const Home = () => {
     }
     sessionStorage.setItem('homeVideoPlayed', 'true');
     setHasPlayedVideo(true);
+
+    if (mobileTimerRef.current) {
+      clearTimeout(mobileTimerRef.current);
+    }
   };
 
   return (
