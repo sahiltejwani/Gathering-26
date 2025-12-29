@@ -1,85 +1,162 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { team } from '../data/team.js';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faInstagram, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 
-const Team = () => {
-  const cards = [
-    {
-      title: "Snow View",
-      description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-      image: "https://images.unsplash.com/photo-1581017601156-b4e8e53df291?ixlib=rb-1.2.1&auto=format&fit=crop&w=2734&q=80"
-    },
-    {
-      title: "Photoshoot mood",
-      description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-      image: "https://images.unsplash.com/photo-1581014023865-4209099f2b71?ixlib=rb-1.2.1&auto=format&fit=crop&w=2734&q=80"
-    },
-    {
-      title: "3D View",
-      description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-      image: "https://images.unsplash.com/photo-1580842579866-b985411b5bd2?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
-    },
-    {
-      title: "Explore The Canvas",
-      description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-      image: "https://images.unsplash.com/photo-1580986475035-f0778c60f5ae?ixlib=rb-1.2.1&auto=format&fit=crop&w=633&q=80"
-    }
-  ];
+
+const TeamCard = ({ image, name, role, instagram, linkedin }) => {
+  const cardRef = useRef(null);
+  const containerRef = useRef(null);
+
+  console.log(instagram);
+  useEffect(() => {
+    const card = cardRef.current;
+    const container = containerRef.current;
+
+    const handleMouseMove = (e) => {
+      if (!container) return;
+
+      const rect = container.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      const mouseX = e.clientX - centerX;
+      const mouseY = e.clientY - centerY;
+
+      // 3D Tilt Effect
+      gsap.to(card, {
+        rotationX: -mouseY / 20,
+        rotationY: mouseX / 20,
+        transformPerspective: 500,
+        ease: 'power1.out',
+        duration: 0.6
+      });
+    };
+
+    const handleMouseLeave = () => {
+      // Reset to original position
+      gsap.to(card, {
+        rotationX: 0,
+        rotationY: 0,
+        transformPerspective: 500,
+        ease: 'power1.out',
+        duration: 0.6
+      });
+    };
+
+    // Add event listeners
+    container.addEventListener('mousemove', handleMouseMove);
+    container.addEventListener('mouseleave', handleMouseLeave);
+
+    // Cleanup
+    return () => {
+      container.removeEventListener('mousemove', handleMouseMove);
+      container.removeEventListener('mouseleave', handleMouseLeave);
+    };
+  }, []);
 
   return (
-    <div className="min-h-screen relative overflow-hidden bg-black">
-      {/* Dynamic Animated Background Layers */}
-      
-      {/* Layer 1: Floating Purple Nebula */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_20%_30%,rgba(168,85,247,0.2),transparent_50%)] animate-[float_20s_ease-in-out_infinite]" />
-      
-      {/* Layer 2: Blue Nebula */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_80%_20%,rgba(59,130,246,0.15),transparent_50%)] animate-[float_25s_ease-in-out_infinite_reverse] [animation-delay:-5s]" />
-      
-      {/* Layer 3: Green Glow */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_80%,rgba(34,197,94,0.1),transparent_50%)] animate-[pulse_15s_ease-in-out_infinite]" />
-      
-      {/* Sparkling Particles */}
-      <div className="absolute inset-0 bg-[radial-gradient(2px_2px_at_20px_30px,#a855f7,transparent),radial-gradient(2px_2px_at_80px_80px,#3b82f6,transparent),radial-gradient(1px_1px_at_40px_40px,#10b981,transparent)] bg-size-[200px_100px] bg-repeat animate-[sparkle_20s_linear_infinite]" />
-      
-      {/* Additional Particle Layer */}
-      <div className="absolute inset-0 bg-[radial-gradient(1px_1px_at_90px_40px,#f59e0b,transparent),radial-gradient(1px_1px_at_130px_80px,#ef4444,transparent),radial-gradient(2px_2px_at_160px_30px,#ec4899,transparent)] bg-size-[200px_100px] bg-repeat animate-[sparkle_25s_linear_infinite] [animation-delay:-10s]" />
-      
-      {/* Subtle Grid Pattern */}
-      <div className="absolute inset-0 opacity-20">
-        <div className="absolute inset-0 bg-grid animate-[grid-move_40s_linear_infinite]" />
-      </div>
+    <div
+      ref={containerRef}
+      className="w-64 perspective-800 h-96 group border-blackx"
+    >
+      <div
+        ref={cardRef}
+        className="relative w-full h-full transition-transform duration-300 ease-out transform-style-3d backface-hidden"
+      >
+        {/* Card Background */}
+        <div
+          className="absolute inset-0 transition-all duration-300 bg-center bg-cover shadow-lg shadow-black rounded-xl filter brightness-75 group-hover:brightness-50"
+          style={{ backgroundImage: `url(${image})` }}
+        />
 
-      {/* Main Content */}
-      <div className="relative z-10">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-light text-white mb-2 drop-shadow-2xl animate-[fade-in-up_1s_ease-out]">Card Design for COEP Gathering</h2>
+        {/* Card Overlay */}
+        <div className="absolute inset-0 transition-opacity duration-300 opacity-20 bg-linear-to-b from-transparent to-black/70 rounded-xl group-hover:opacity-100" />
+
+        {/* Card Content */}
+        <div className="absolute bottom-0 left-0 right-0 p-6 text-white transition-all duration-300 transform translate-y-10 opacity-0 group-hover:translate-y-0 group-hover:opacity-100">
+          <h3 className="mb-1 text-xl font-bold">{name}</h3>
+          <p className="text-sm text-white/80">{role}</p>
+
+          {/* Social Media Links */}
+          <div className="flex mt-2 space-x-3">
+            {instagram && (
+              <a
+                href={instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white transition-colors hover:text-pink-400"
+              >
+                <FontAwesomeIcon icon={faInstagram} className="text-xl" />
+              </a>
+            )}
+            {linkedin && (
+              <a
+                href={linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white transition-colors hover:text-blue-500"
+              >
+                <FontAwesomeIcon icon={faLinkedin} className="text-xl" />
+              </a>
+            )}
+          </div>
         </div>
-        
-        <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-4">
-          {cards.map((card, index) => (
-            <div
-              key={index}
-              className={`group relative overflow-hidden rounded-2xl shadow-2xl h-80 sm:h-96 bg-white transition-all duration-700 ease-out animate-[fade-in-up_0.8s_ease-out] delay-${index * 100}`}
-              style={{ animationDelay: `${index * 0.1}s` }}
+      </div>
+    </div>
+  );
+}
+  ;
+
+const Team = () => {
+  return (
+    <div className="min-h-svh overflow-hidden bg-fixed bg-no-repeat bg-cover bg-teamsBackground ">
+      <div className='mt-20 mb-12 text-5xl font-extrabold tracking-wider text-center text-white uppercase drop-shadow-md font-paperHeader'><p className='text-[2em]' style={{
+        WebkitTextStroke: "0.01px black",
+        textShadow: "2px 2px 2px black"
+      }}>Gathering'26</p>
+        <p style={{
+          WebkitTextStroke: "0.01px black",
+          textShadow: "2px 2px 2px black"
+        }}>CORE TEAM</p>
+      </div>
+      
+      <div className="px-4 overflow-hidden">
+        {team.map((section, sectionIndex) => (
+          <div key={sectionIndex} className={sectionIndex < team.length - 1 ? 'mb-40' : 'mb-10'}>
+            <h2
+              style={{
+                textAlign: "center",
+                fontSize: "3rem",
+                fontWeight: "700",
+                background: "linear-gradient(135deg, #FF6B00 0%, #FFD700 50%, #FFA500 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+                letterSpacing: "4px",
+                marginBottom: "-50px",
+                fontFamily: "'Pacifico', 'Dancing Script', 'Great Vibes', 'Allura', cursive",
+                textShadow: "0 0 30px rgba(255, 165, 0, 0.5)",
+                marginBottom: "20px"
+              }}
             >
-              {/* Background Image */}
-              <div
-                className="absolute inset-0 w-full h-[110%] bg-cover bg-center transition-transform duration-1000 ease-out group-hover:scale-105"
-                style={{ backgroundImage: `url(${card.image})` }}
-              />
-              
-              {/* Gradient Overlay */}
-              <div className="absolute inset-0 bg-linear-to-b from-transparent via-black/30 to-black/80 translate-y-1/2 transition-transform duration-1000 ease-out group-hover:translate-y-0" />
-              
-              {/* Content */}
-              <div className="absolute bottom-0 left-0 right-0 p-6 text-center text-white z-10 flex flex-col items-center justify-end h-full transition-transform duration-700 ease-out sm:translate-y-[calc(100%-4.5rem)] sm:group-hover:translate-y-0 sm:group-hover:justify-center">
-                <h2 className="text-2xl font-bold mb-4 leading-tight">{card.title}</h2>
-                <p className="italic text-lg leading-relaxed opacity-100 sm:opacity-0 sm:translate-y-4 transition-all duration-700 ease-out sm:group-hover:opacity-100 sm:group-hover:translate-y-0 delay-100">
-                  {card.description}
-                </p>
-              </div>
+              {section.title}
+            </h2>
+            <div className="flex flex-col items-center space-y-8 md:flex-row md:justify-center md:space-y-0 md:space-x-8 ">
+              {section.members.map((member, memberIndex) => (
+                <TeamCard
+                  key={`${sectionIndex}-${memberIndex}`}
+                  image={member.image}
+                  name={member.name}
+                  role={member.role}
+                  instagram={member.instagram}
+                  linkedin={member.linkedin}
+                />
+              ))}
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
+
       </div>
     </div>
   );
