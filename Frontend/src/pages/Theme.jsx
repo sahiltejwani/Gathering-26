@@ -48,7 +48,7 @@ export default function Theme() {
 
         {/* Theme name with premium typography */}
         <h1 className="text-8xl md:text-9xl font-bold mb-12 tracking-tight">
-          <span className="inline-block bg-gradient-to-r from-orange-400 via-pink-400 to-purple-400 bg-clip-text text-transparent animate-gradient" style={{
+          <span className="inline-block bg-linear-to-r from-orange-400 via-pink-400 to-purple-400 bg-clip-text text-transparent animate-gradient" style={{
             fontFamily: 'Georgia, serif',
             textShadow: '0 0 80px rgba(249, 115, 22, 0.3)',
           }}>
@@ -58,9 +58,9 @@ export default function Theme() {
 
         {/* Elegant divider */}
         <div className="flex items-center justify-center gap-4 mb-12">
-          <div className="h-px w-16 bg-gradient-to-r from-transparent via-orange-500 to-transparent" />
+          <div className="h-px w-16 bg-linear-to-r from-transparent via-orange-500 to-transparent" />
           <div className="w-1.5 h-1.5 rounded-full bg-orange-500" />
-          <div className="h-px w-16 bg-gradient-to-r from-transparent via-orange-500 to-transparent" />
+          <div className="h-px w-16 bg-linear-to-r from-transparent via-orange-500 to-transparent" />
         </div>
 
         {/* Description with refined typography */}
@@ -82,7 +82,7 @@ export default function Theme() {
 
         {/* Subtle accent line */}
         <div className="mt-16 flex justify-center">
-          <div className="h-1 w-32 bg-gradient-to-r from-transparent via-orange-500/50 to-transparent rounded-full" />
+          <div className="h-1 w-32 bg-linear-to-r from-transparent via-orange-500/50 to-transparent rounded-full" />
         </div>
       </div>
 
