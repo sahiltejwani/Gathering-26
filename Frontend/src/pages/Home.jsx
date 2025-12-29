@@ -13,19 +13,7 @@ const Home = () => {
     const videoPlayed = sessionStorage.getItem('homeVideoPlayed');
 
     // Check if device is mobile based on screen width
-    const isMobile = () => {
-      return window.innerWidth <= 768;
-    };
-
-    if (isMobile() && videoRef.current) {
-      mobileTimerRef.current = setTimeout(() => {
-        if (videoRef.current) {
-          videoRef.current.pause();
-          sessionStorage.setItem('homeVideoPlayed', 'true');
-          setHasPlayedVideo(true);
-        }
-      }, 7000);
-    }
+    const isMobile = window.innerWidth <= 768;
 
     if (videoPlayed === 'true') {
       setHasPlayedVideo(true);
@@ -50,17 +38,31 @@ const Home = () => {
       return;
     }
 
+    // Set up mobile video timer - stop after 7 seconds
+    if (isMobile) {
+      mobileTimerRef.current = setTimeout(() => {
+        if (videoRef.current) {
+          videoRef.current.pause();
+          sessionStorage.setItem('homeVideoPlayed', 'true');
+          setHasPlayedVideo(true);
+        }
+      }, 7000);
+    }
+
+    // Light rays fade in - starts earlier on mobile for better visibility
     const fadeTimer = setTimeout(() => {
       setLightRaysOpacity(1);
-    }, 3000);
+    }, isMobile ? 2000 : 3000);
 
+    // Logo appears
     const logoTimer = setTimeout(() => {
       setShowLogo(true);
-    }, 6000);
+    }, isMobile ? 4000 : 6000);
 
+    // Tagline appears
     const taglineTimer = setTimeout(() => {
       setShowTagline(true);
-    }, 6000);
+    }, isMobile ? 5000 : 7000);
 
     return () => {
       clearTimeout(fadeTimer);
@@ -69,7 +71,6 @@ const Home = () => {
       if (mobileTimerRef.current) {
         clearTimeout(mobileTimerRef.current);
       }
-
     };
   }, []);
 
@@ -86,9 +87,15 @@ const Home = () => {
   };
 
   return (
-    <div className="w-full h-screen relative overflow-hidden bg-black mask-[linear-gradient(to_bottom,black_80%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,black_80%,transparent)]">
+    <div className="w-full h-screen relative overflow-hidden bg-black">
       {/* Light Rays Effect */}
-      <div className="absolute inset-0 z-1 pointer-events-none transition-opacity duration-2000 ease-in" style={{ opacity: lightRaysOpacity }}>
+      <div 
+        className="absolute inset-0 pointer-events-none transition-opacity ease-in z-10" 
+        style={{ 
+          opacity: lightRaysOpacity,
+          transitionDuration: '2000ms'
+        }}
+      >
         <LightRays
           raysOrigin="top-center"
           raysColor="#00ffff"
@@ -105,15 +112,20 @@ const Home = () => {
 
       {/* Logo */}
       <div
-        className="absolute top-1/2 left-[47%] z-3 transition-all duration-1500 ease-out"
+        className="absolute top-1/2 left-[47%] transition-all ease-out z-30"
         style={{
           transform: showLogo
             ? "translate(-50%, -60%)"
             : "translate(-50%, -50%)",
           opacity: showLogo ? 1 : 0,
+          transitionDuration: '1500ms'
         }}
       >
-        <img src="/Logotext.png" alt="Logo" style={{ width: "500px" }} />
+        <img 
+          src="/Logotext.png" 
+          alt="Logo" 
+          className="w-125 max-w-[80vw]"
+        />
       </div>
 
       {/* Tagline */}
@@ -125,6 +137,11 @@ const Home = () => {
             : "translate(-30%, -10%)",
           opacity: showTagline ? 1 : 0,
           filter: showTagline ? "blur(0px)" : "blur(10px)",
+          transitionDuration: '1800ms',
+          transitionTimingFunction: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+          fontFamily: "'Cinzel Decorative', 'Trajan Pro', serif",
+          backgroundImage: 'linear-gradient(135deg, #f4e4c1 0%, #e8d4a8 50%, #d4af7a 100%)',
+          textShadow: '0 0 20px rgba(244, 228, 193, 0.5)'
         }}
       >
         - where cultures unite
@@ -135,6 +152,7 @@ const Home = () => {
         ref={videoRef}
         autoPlay={!hasPlayedVideo}
         muted
+        playsInline
         onEnded={handleVideoEnd}
         preload="metadata"
         className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none"
@@ -142,7 +160,6 @@ const Home = () => {
         <source src="/curtains.mp4" type="video/mp4" />
         <source src="/curtains.webm" type="video/webm" />
       </video>
-
     </div>
   );
 };
