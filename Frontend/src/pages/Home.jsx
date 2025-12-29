@@ -46,7 +46,7 @@ const Home = () => {
           sessionStorage.setItem('homeVideoPlayed', 'true');
           setHasPlayedVideo(true);
         }
-      }, 9000);
+      }, 7000);
     }
 
     // Light rays fade in - starts earlier on mobile for better visibility
