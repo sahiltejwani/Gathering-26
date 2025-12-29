@@ -47,14 +47,20 @@ export default function Theme() {
         </div>
 
         {/* Theme name with premium typography */}
-        <h1 className="text-8xl md:text-9xl font-bold mb-12 tracking-tight">
-          <span className="inline-block bg-linear-to-r from-orange-400 via-pink-400 to-purple-400 bg-clip-text text-transparent animate-gradient" style={{
-            fontFamily: 'Georgia, serif',
-            textShadow: '0 0 80px rgba(249, 115, 22, 0.3)',
-          }}>
-            Anandotsav
-          </span>
-        </h1>
+        <h1
+  className="font-bold tracking-tight mb-6"
+  style={{
+    fontSize: "clamp(2.8rem, 7vw, 6rem)", // 🔥 bigger on desktop
+    lineHeight: "1.05",
+    background: "linear-gradient(135deg, #FF6B00 0%, #FFD700 50%, #FFA500 100%)",
+    WebkitBackgroundClip: "text",
+    WebkitTextFillColor: "transparent",
+    textShadow: "0 0 70px rgba(249, 115, 22, 0.45)",
+    fontFamily: "Georgia, serif",
+  }}
+>
+  Anandotsav
+</h1>
 
         {/* Elegant divider */}
         <div className="flex items-center justify-center gap-4 mb-12">
