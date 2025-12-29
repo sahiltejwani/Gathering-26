@@ -25,7 +25,7 @@ const Team = () => {
   ];
 
   return (
-    <div className="min-h-screen relative overflow-hidden bg-black py-12 px-4">
+    <div className="min-h-screen relative overflow-hidden bg-black">
       {/* Dynamic Animated Background Layers */}
       
       {/* Layer 1: Floating Purple Nebula */}
@@ -38,10 +38,10 @@ const Team = () => {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_80%,rgba(34,197,94,0.1),transparent_50%)] animate-[pulse_15s_ease-in-out_infinite]" />
       
       {/* Sparkling Particles */}
-      <div className="absolute inset-0 bg-[radial-gradient(2px_2px_at_20px_30px,#a855f7,transparent),radial-gradient(2px_2px_at_80px_80px,#3b82f6,transparent),radial-gradient(1px_1px_at_40px_40px,#10b981,transparent)] bg-[length:200px_100px] bg-repeat animate-[sparkle_20s_linear_infinite]" />
+      <div className="absolute inset-0 bg-[radial-gradient(2px_2px_at_20px_30px,#a855f7,transparent),radial-gradient(2px_2px_at_80px_80px,#3b82f6,transparent),radial-gradient(1px_1px_at_40px_40px,#10b981,transparent)] bg-size-[200px_100px] bg-repeat animate-[sparkle_20s_linear_infinite]" />
       
       {/* Additional Particle Layer */}
-      <div className="absolute inset-0 bg-[radial-gradient(1px_1px_at_90px_40px,#f59e0b,transparent),radial-gradient(1px_1px_at_130px_80px,#ef4444,transparent),radial-gradient(2px_2px_at_160px_30px,#ec4899,transparent)] bg-[length:200px_100px] bg-repeat animate-[sparkle_25s_linear_infinite] [animation-delay:-10s]" />
+      <div className="absolute inset-0 bg-[radial-gradient(1px_1px_at_90px_40px,#f59e0b,transparent),radial-gradient(1px_1px_at_130px_80px,#ef4444,transparent),radial-gradient(2px_2px_at_160px_30px,#ec4899,transparent)] bg-size-[200px_100px] bg-repeat animate-[sparkle_25s_linear_infinite] [animation-delay:-10s]" />
       
       {/* Subtle Grid Pattern */}
       <div className="absolute inset-0 opacity-20">
@@ -52,7 +52,6 @@ const Team = () => {
       <div className="relative z-10">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-light text-white mb-2 drop-shadow-2xl animate-[fade-in-up_1s_ease-out]">Card Design for COEP Gathering</h2>
-          <h3 className="text-xl text-gray-400 animate-[fade-in-up_1s_ease-out] [animation-delay:0.3s]">Designed by: <strong className="font-semibold text-white">Sahil Tejwani</strong></h3>
         </div>
         
         <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-4">
@@ -69,7 +68,7 @@ const Team = () => {
               />
               
               {/* Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/30 to-black/80 translate-y-1/2 transition-transform duration-1000 ease-out group-hover:translate-y-0" />
+              <div className="absolute inset-0 bg-linear-to-b from-transparent via-black/30 to-black/80 translate-y-1/2 transition-transform duration-1000 ease-out group-hover:translate-y-0" />
               
               {/* Content */}
               <div className="absolute bottom-0 left-0 right-0 p-6 text-center text-white z-10 flex flex-col items-center justify-end h-full transition-transform duration-700 ease-out sm:translate-y-[calc(100%-4.5rem)] sm:group-hover:translate-y-0 sm:group-hover:justify-center">
