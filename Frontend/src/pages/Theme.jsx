@@ -52,7 +52,7 @@ export default function Theme() {
             fontFamily: 'Georgia, serif',
             textShadow: '0 0 80px rgba(249, 115, 22, 0.3)',
           }}>
-            Anandutsav
+            Anandotsav
           </span>
         </h1>
 
