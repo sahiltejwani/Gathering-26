@@ -10,15 +10,21 @@ const Events = () => {
         paddingTop: "80px",
       }}
     >
+      <h3 className="text-center text-gray-600 text-xl">- COEP GATHERING -</h3>
       {/* Heading */}
       <h1
         style={{
           textAlign: "center",
           fontSize: "3rem",
           fontWeight: "700",
-          color: "white",
-          marginBottom: "40px",
-          letterSpacing: "2px"
+          background: "linear-gradient(135deg, #FF6B00 0%, #FFD700 50%, #FFA500 100%)",
+          WebkitBackgroundClip: "text",
+          WebkitTextFillColor: "transparent",
+          backgroundClip: "text",
+          letterSpacing: "4px",
+          marginBottom: "-50px",
+          fontFamily: "'Pacifico', 'Dancing Script', 'Great Vibes', 'Allura', cursive",
+          textShadow: "0 0 30px rgba(255, 165, 0, 0.5)",
         }}
       >
         EVENTS

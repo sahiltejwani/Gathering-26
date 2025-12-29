@@ -571,7 +571,7 @@ function CircularGallery({
 
 export default function Events() {
   return (
-    <div style={{ minHeight: "100vh", position: "relative", paddingTop: "80px" }}>
+    <div style={{ minHeight: "100vh", position: "relative"}}>
 
       <div style={{ height: "600px" }}>
         <CircularGallery

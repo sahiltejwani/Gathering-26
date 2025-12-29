@@ -1,7 +1,10 @@
 // src/components/common/Footer.jsx
 export default function Footer() {
   return (
-    <footer className="fest-footer">
+    <footer className="fest-footer relative">
+      {/* Gradient Fade Overlay */}
+      <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-transparent via-black/50 to-black pointer-events-none -translate-y-full"></div>
+      
       <div className="fest-footer__top">
         <div className="fest-footer__brand">
           <h3>College Gathering</h3>
@@ -14,8 +17,8 @@ export default function Footer() {
         <div className="fest-footer__links">
           <div>
             <h4>Explore</h4>
-            <a href="/events">Events</a>
-            <a href="/sports">Sports</a>
+            <a href="/#events">Events</a>
+            <a href="/#sports">Sports</a>
             <a href="/team">Our Team</a>
             <a href="/gallery">Gallery</a>
             <a href="/passes">Passes</a>

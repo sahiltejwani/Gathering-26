@@ -42,8 +42,23 @@ const Sports = () => {
 
   return (
     <div className="py-16 min-h-screen flex flex-col items-center">
-      <h3 className="text-center text-gray-600">- COEP GATHERING -</h3>
-      <h1 className="text-center text-4xl font-bold text-orange-500 mb-10">
+      <h3 className="text-center text-gray-600 text-xl">- COEP GATHERING -</h3>
+      <h1
+        style={{
+          textAlign: "center",
+          fontSize: "3rem",
+          fontWeight: "700",
+          background: "linear-gradient(135deg, #FF6B00 0%, #FFD700 50%, #FFA500 100%)",
+          WebkitBackgroundClip: "text",
+          WebkitTextFillColor: "transparent",
+          backgroundClip: "text",
+          letterSpacing: "4px",
+          marginBottom: "-50px",
+          fontFamily: "'Pacifico', 'Dancing Script', 'Great Vibes', 'Allura', cursive",
+          textShadow: "0 0 30px rgba(255, 165, 0, 0.5)",
+          marginBottom: "20px"
+        }}
+      >
         SPORTS
       </h1>
 
