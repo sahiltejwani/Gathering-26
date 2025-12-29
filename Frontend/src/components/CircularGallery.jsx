@@ -1,5 +1,5 @@
 import { Camera, Mesh, Plane, Program, Renderer, Texture, Transform } from 'ogl';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { events } from '../data/events';
 
 function debounce(func, wait) {
@@ -107,7 +107,9 @@ class Media {
     bend,
     textColor,
     borderRadius = 0,
-    font
+    font,
+    data,
+    onClickCallback
   }) {
     this.extra = 0;
     this.geometry = geometry;
@@ -124,6 +126,8 @@ class Media {
     this.textColor = textColor;
     this.borderRadius = borderRadius;
     this.font = font;
+    this.data = data;
+    this.onClickCallback = onClickCallback;
     this.createShader();
     this.createMesh();
     this.createTitle();
@@ -178,7 +182,6 @@ class Media {
           
           float d = roundedBoxSDF(vUv - 0.5, vec2(0.5 - uBorderRadius), uBorderRadius);
           
-          // Smooth antialiasing for edges
           float edgeSmooth = 0.002;
           float alpha = 1.0 - smoothstep(-edgeSmooth, edgeSmooth, d);
           
@@ -278,6 +281,23 @@ class Media {
     this.widthTotal = this.width * this.length;
     this.x = this.width * this.index;
   }
+  isClicked(clientX, clientY, canvas) {
+    const rect = canvas.getBoundingClientRect();
+    const x = ((clientX - rect.left) / rect.width) * 2 - 1;
+    const y = -((clientY - rect.top) / rect.height) * 2 + 1;
+    
+    const planeX = this.plane.position.x;
+    const planeY = this.plane.position.y;
+    const scaleX = this.plane.scale.x;
+    const scaleY = this.plane.scale.y;
+    
+    const viewX = x * (this.viewport.width / 2);
+    const viewY = y * (this.viewport.height / 2);
+    
+    const isInside = Math.abs(viewX - planeX) < scaleX / 2 && Math.abs(viewY - planeY) < scaleY / 2;
+    
+    return isInside;
+  }
 }
 
 class App {
@@ -290,7 +310,8 @@ class App {
       borderRadius = 0,
       font = 'bold 30px Figtree',
       scrollSpeed = 2,
-      scrollEase = 0.05
+      scrollEase = 0.05,
+      onMediaClick
     } = {}
   ) {
     document.documentElement.classList.remove('no-js');
@@ -298,6 +319,7 @@ class App {
     this.scrollSpeed = scrollSpeed;
     this.scroll = { ease: scrollEase, current: 0, target: 0, last: 0 };
     this.onCheckDebounce = debounce(this.onCheck, 200);
+    this.onMediaClick = onMediaClick;
     this.createRenderer();
     this.createCamera();
     this.createScene();
@@ -349,7 +371,9 @@ class App {
         bend,
         textColor,
         borderRadius,
-        font
+        font,
+        data,
+        onClickCallback: this.onMediaClick
       });
     });
   }
@@ -357,16 +381,40 @@ class App {
     this.isDown = true;
     this.scroll.position = this.scroll.current;
     this.start = e.touches ? e.touches[0].clientX : e.clientX;
+    this.hasMoved = false;
   }
   onTouchMove(e) {
     if (!this.isDown) return;
     const x = e.touches ? e.touches[0].clientX : e.clientX;
     const distance = (this.start - x) * (this.scrollSpeed * 0.025);
+    
+    if (Math.abs(distance) > 2) {
+      this.hasMoved = true;
+    }
+    
     this.scroll.target = this.scroll.position + distance;
   }
-  onTouchUp() {
+  onTouchUp(e) {
+    if (this.isDown && !this.hasMoved) {
+      this.handleClick(e);
+    }
     this.isDown = false;
     this.onCheck();
+  }
+  handleClick(e) {
+    const clientX = e.clientX || (e.changedTouches && e.changedTouches[0].clientX);
+    const clientY = e.clientY || (e.changedTouches && e.changedTouches[0].clientY);
+    
+    if (!clientX || !clientY) return;
+    
+    for (let media of this.medias) {
+      if (media.isClicked(clientX, clientY, this.gl.canvas)) {
+        if (this.onMediaClick) {
+          this.onMediaClick(media.data);
+        }
+        break;
+      }
+    }
   }
   onWheel(e) {
     const delta = e.deltaY || e.wheelDelta || e.detail;
@@ -440,7 +488,7 @@ class App {
   }
 }
 
-export default function CircularGallery({
+function CircularGallery({
   items,
   bend = 3,
   textColor = '#ffffff',
@@ -450,11 +498,90 @@ export default function CircularGallery({
   scrollEase = 0.05
 }) {
   const containerRef = useRef(null);
+  const [selectedEvent, setSelectedEvent] = useState(null);
+  const [isClosing, setIsClosing] = useState(false);
+  
   useEffect(() => {
-    const app = new App(containerRef.current, { items, bend, textColor, borderRadius, font, scrollSpeed, scrollEase });
+    const app = new App(containerRef.current, { 
+      items, 
+      bend, 
+      textColor, 
+      borderRadius, 
+      font, 
+      scrollSpeed, 
+      scrollEase,
+      onMediaClick: (data) => setSelectedEvent(data)
+    });
     return () => {
       app.destroy();
     };
   }, [items, bend, textColor, borderRadius, font, scrollSpeed, scrollEase]);
-  return <div className="w-full h-full overflow-hidden cursor-grab active:cursor-grabbing" ref={containerRef} />;
+  
+  const handleClose = () => {
+    setIsClosing(true);
+    setTimeout(() => {
+      setSelectedEvent(null);
+      setIsClosing(false);
+    }, 300);
+  };
+  
+  return (
+    <>
+      <div className="w-full h-full overflow-hidden cursor-grab active:cursor-grabbing" ref={containerRef} />
+      
+      {selectedEvent && (
+        <div 
+          className={`fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm transition-all duration-300 ${
+            isClosing ? 'opacity-0' : 'opacity-100'
+          }`}
+          style={{
+            background: 'rgba(0, 0, 0, 0.3)'
+          }}
+          onClick={handleClose}
+        >
+          <div 
+            className={`relative bg-white rounded-lg max-w-3xl max-h-[90vh] overflow-auto shadow-2xl transition-all duration-300 ${
+              isClosing ? 'scale-95 opacity-0' : 'scale-100 opacity-100'
+            }`}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              className="absolute top-4 right-4 w-10 h-10 flex items-center justify-center bg-black bg-opacity-50 hover:bg-opacity-70 text-white rounded-full z-10 transition-all"
+              onClick={handleClose}
+            >
+              ✕
+            </button>
+            
+            <img
+              src={selectedEvent.image}
+              alt={selectedEvent.text}
+              className="w-full h-auto max-h-[60vh] object-cover rounded-t-lg"
+            />
+            
+            <div className="p-8">
+              <h2 className="text-3xl font-bold mb-4 text-gray-900">{selectedEvent.text}</h2>
+              <p className="text-lg text-gray-700 leading-relaxed">{selectedEvent.description}</p>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
+
+export default function Events() {
+  return (
+    <div style={{ minHeight: "100vh", position: "relative", paddingTop: "80px" }}>
+
+      <div style={{ height: "600px" }}>
+        <CircularGallery
+          items={events}
+          bend={0}
+          textColor="#ffffff"
+          borderRadius={0.05}
+          scrollEase={0.02}
+        />
+      </div>
+    </div>
+  );
 }
