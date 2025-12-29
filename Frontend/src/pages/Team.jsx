@@ -1,15 +1,17 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
-import { team } from '../data/team.js';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faInstagram, faLinkedin } from "@fortawesome/free-brands-svg-icons";
+import { team } from '../data/team';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faInstagram, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 
 
 const TeamCard = ({ image, name, role, instagram, linkedin }) => {
   const cardRef = useRef(null);
   const containerRef = useRef(null);
-
+  const [isActive, setIsActive] = useState(false);
+  
   console.log(instagram);
+  
   useEffect(() => {
     const card = cardRef.current;
     const container = containerRef.current;
@@ -55,10 +57,15 @@ const TeamCard = ({ image, name, role, instagram, linkedin }) => {
     };
   }, []);
 
+  const handleClick = () => {
+    setIsActive(!isActive);
+  };
+
   return (
     <div
       ref={containerRef}
-      className="w-64 perspective-800 h-96 group border-blackx"
+      onClick={handleClick}
+      className="w-64 perspective-800 h-96 group border-blackx cursor-pointer"
     >
       <div
         ref={cardRef}
@@ -66,15 +73,21 @@ const TeamCard = ({ image, name, role, instagram, linkedin }) => {
       >
         {/* Card Background */}
         <div
-          className="absolute inset-0 transition-all duration-300 bg-center bg-cover shadow-lg shadow-black rounded-xl filter brightness-75 group-hover:brightness-50"
+          className={`absolute inset-0 transition-all duration-300 bg-center bg-cover shadow-lg shadow-black rounded-xl filter ${
+            isActive ? 'brightness-50' : 'brightness-75 group-hover:brightness-50'
+          }`}
           style={{ backgroundImage: `url(${image})` }}
         />
 
         {/* Card Overlay */}
-        <div className="absolute inset-0 transition-opacity duration-300 opacity-20 bg-linear-to-b from-transparent to-black/70 rounded-xl group-hover:opacity-100" />
+        <div className={`absolute inset-0 transition-opacity duration-300 bg-linear-to-b from-transparent to-black/70 rounded-xl ${
+          isActive ? 'opacity-100' : 'opacity-20 group-hover:opacity-100'
+        }`} />
 
         {/* Card Content */}
-        <div className="absolute bottom-0 left-0 right-0 p-6 text-white transition-all duration-300 transform translate-y-10 opacity-0 group-hover:translate-y-0 group-hover:opacity-100">
+        <div className={`absolute bottom-0 left-0 right-0 p-6 text-white transition-all duration-300 transform ${
+          isActive ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0 group-hover:translate-y-0 group-hover:opacity-100'
+        }`}>
           <h3 className="mb-1 text-xl font-bold">{name}</h3>
           <p className="text-sm text-white/80">{role}</p>
 
@@ -86,6 +99,7 @@ const TeamCard = ({ image, name, role, instagram, linkedin }) => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-white transition-colors hover:text-pink-400"
+                onClick={(e) => e.stopPropagation()}
               >
                 <FontAwesomeIcon icon={faInstagram} className="text-xl" />
               </a>
@@ -96,6 +110,7 @@ const TeamCard = ({ image, name, role, instagram, linkedin }) => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-white transition-colors hover:text-blue-500"
+                onClick={(e) => e.stopPropagation()}
               >
                 <FontAwesomeIcon icon={faLinkedin} className="text-xl" />
               </a>
@@ -105,39 +120,28 @@ const TeamCard = ({ image, name, role, instagram, linkedin }) => {
       </div>
     </div>
   );
-}
-  ;
+};
 
-const Team = () => {
+const TeamsSection = () => {
   return (
     <div className="min-h-svh overflow-hidden bg-fixed bg-no-repeat bg-cover bg-teamsBackground ">
-      <div className='mt-20 mb-12 text-5xl font-extrabold tracking-wider text-center text-white uppercase drop-shadow-md font-paperHeader'><p className='text-[2em]' style={{
-        WebkitTextStroke: "0.01px black",
-        textShadow: "2px 2px 2px black"
-      }}>Gathering'26</p>
+      <div className='mt-20 mb-12 text-5xl font-extrabold tracking-wider text-center text-white uppercase drop-shadow-md font-paperHeader'>
+        <p className='text-[2em]' style={{
+          WebkitTextStroke: "0.01px black",
+          textShadow: "2px 2px 2px black"
+        }}>9th EDITION</p>
         <p style={{
           WebkitTextStroke: "0.01px black",
           textShadow: "2px 2px 2px black"
         }}>CORE TEAM</p>
       </div>
-      
       <div className="px-4 overflow-hidden">
         {team.map((section, sectionIndex) => (
           <div key={sectionIndex} className={sectionIndex < team.length - 1 ? 'mb-40' : 'mb-10'}>
             <h2
+              className="mb-12 text-3xl font-extrabold tracking-wider text-center text-white uppercase md:text-5xl drop-shadow-md"
               style={{
-                textAlign: "center",
-                fontSize: "3rem",
-                fontWeight: "700",
-                background: "linear-gradient(135deg, #FF6B00 0%, #FFD700 50%, #FFA500 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-                letterSpacing: "4px",
-                marginBottom: "-50px",
-                fontFamily: "'Pacifico', 'Dancing Script', 'Great Vibes', 'Allura', cursive",
-                textShadow: "0 0 30px rgba(255, 165, 0, 0.5)",
-                marginBottom: "20px"
+                WebkitTextStroke: "1px grey",
               }}
             >
               {section.title}
@@ -156,10 +160,9 @@ const Team = () => {
             </div>
           </div>
         ))}
-
       </div>
     </div>
   );
 };
 
-export default Team;
+export default TeamsSection;
