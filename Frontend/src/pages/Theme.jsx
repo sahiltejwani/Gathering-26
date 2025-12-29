@@ -64,9 +64,9 @@ export default function Theme() {
 
         {/* Elegant divider */}
         <div className="flex items-center justify-center gap-4 mb-12">
-          <div className="h-px w-16 bg-gradient-to-r from-transparent via-orange-500 to-transparent" />
+          <div className="h-px w-16 bg-linear-to-r from-transparent via-orange-500 to-transparent" />
           <div className="w-1.5 h-1.5 rounded-full bg-orange-500" />
-          <div className="h-px w-16 bg-gradient-to-r from-transparent via-orange-500 to-transparent" />
+          <div className="h-px w-16 bg-linear-to-r from-transparent via-orange-500 to-transparent" />
         </div>
 
         {/* Description with refined typography */}
@@ -88,7 +88,7 @@ export default function Theme() {
 
         {/* Subtle accent line */}
         <div className="mt-16 flex justify-center">
-          <div className="h-1 w-32 bg-gradient-to-r from-transparent via-orange-500/50 to-transparent rounded-full" />
+          <div className="h-1 w-32 bg-linear-to-r from-transparent via-orange-500/50 to-transparent rounded-full" />
         </div>
       </div>
 
