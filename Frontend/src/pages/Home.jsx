@@ -40,7 +40,7 @@ const Home = () => {
 
     const logoTimer = setTimeout(() => {
       setShowLogo(true);
-    }, 5500);
+    }, 6000);
 
     const taglineTimer = setTimeout(() => {
       setShowTagline(true);
