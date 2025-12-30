@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Ticket, Calendar, MapPin, Clock } from "lucide-react";
 import {motion} from "framer-motion"
+import { passes } from "../data/passes";
+
 const events = [
   {
     name: "Star Night",
@@ -73,7 +75,7 @@ const Passes = () => {
 
       {/* 3. Cards Grid */}
       <div className="relative z-10 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {events.map((event, index) => (
+        {passes.map((event, index) => (
           <EventCard key={index} event={event} index={index} />
         ))}
       </div>
