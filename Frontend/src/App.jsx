@@ -3,10 +3,6 @@ import { Routes, Route } from "react-router-dom"
 
 import Navbar from './components/common/Navbar'
 import Footer from './components/common/Footer'
-
-import Home from './pages/Home'
-import Events from './pages/Events'
-import Sports from './pages/Sports'
 import Team from './pages/Team'
 import Passes from './pages/Passes'
 import Gallery from './pages/Gallery'

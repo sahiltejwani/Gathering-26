@@ -113,6 +113,7 @@ const Home = () => {
           noiseAmount={0.1}
           distortion={0.05}
           className="custom-rays"
+          mobileIntensityMultiplier={3.0}
         />
       </div>
 
@@ -136,7 +137,7 @@ const Home = () => {
 
       {/* Tagline */}
       <div
-        className="absolute top-[58%] left-[61%] z-3 transition-all duration-1800 ease-[cubic-bezier(0.34,1.56,0.64,1)] font-['Cinzel_Decorative','Trajan_Pro',serif] text-[36px] font-semibold italic tracking-[3px] bg-[linear-gradient(135deg,#f4e4c1_0%,#e8d4a8_50%,#d4af7a_100%)] bg-clip-text text-transparent [text-shadow:0_0_20px_rgba(244,228,193,0.5)]"
+        className="absolute top-[58%] left-[61%] z-3 transition-all duration-1800 ease-[cubic-bezier(0.34,1.56,0.64,1)] font-['Cinzel_Decorative','Trajan_Pro',serif] text-[18px] md:text-[36px] font-semibold italic tracking-[2px] md:tracking-[3px] bg-[linear-gradient(135deg,#f4e4c1_0%,#e8d4a8_50%,#d4af7a_100%)] bg-clip-text text-transparent [text-shadow:0_0_20px_rgba(244,228,193,0.5)]"
         style={{
           transform: showTagline
             ? "translate(-30%, 10%)"
