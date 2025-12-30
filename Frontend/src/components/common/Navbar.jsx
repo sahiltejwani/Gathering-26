@@ -34,7 +34,12 @@ export default function Navbar() {
           if (rect.top <= 150 && rect.bottom >= 150) current = id;
         }
       });
-      if (activeHash !== `#${current}`) setActiveHash(`#${current}`);
+      const newHash = `#${current}`;
+      if (activeHash !== newHash) {
+        setActiveHash(newHash);
+        // THIS IS THE FIX: Update the URL hash when scrolling
+        window.history.replaceState(null, "", newHash);
+      }
     };
 
     window.addEventListener("scroll", handleScroll);
