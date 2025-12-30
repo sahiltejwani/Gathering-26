@@ -43,6 +43,7 @@ const LightRays = ({
   mouseInfluence = 0.1,
   noiseAmount = 0.0,
   distortion = 0.0,
+  mobileIntensityMultiplier = 2.0,
   className = ''
 }) => {
   const containerRef = useRef(null);
@@ -54,7 +55,20 @@ const LightRays = ({
   const meshRef = useRef(null);
   const cleanupFunctionRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const observerRef = useRef(null);
+
+  // Detect mobile view
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -133,6 +147,7 @@ uniform vec2  mousePos;
 uniform float mouseInfluence;
 uniform float noiseAmount;
 uniform float distortion;
+uniform float intensityBoost;
 
 varying vec2 vUv;
 
@@ -163,7 +178,7 @@ float rayStrength(vec2 raySource, vec2 rayRefDirection, vec2 coord,
     0.0, 1.0
   );
 
-  return baseStrength * lengthFalloff * fadeFalloff * spreadFactor * pulse;
+  return baseStrength * lengthFalloff * fadeFalloff * spreadFactor * pulse * intensityBoost;
 }
 
 void mainImage(out vec4 fragColor, in vec2 fragCoord) {
@@ -226,7 +241,8 @@ void main() {
         mousePos: { value: [0.5, 0.5] },
         mouseInfluence: { value: mouseInfluence },
         noiseAmount: { value: noiseAmount },
-        distortion: { value: distortion }
+        distortion: { value: distortion },
+        intensityBoost: { value: isMobile ? mobileIntensityMultiplier : 1.0 }
       };
       uniformsRef.current = uniforms;
 
@@ -334,7 +350,9 @@ void main() {
     followMouse,
     mouseInfluence,
     noiseAmount,
-    distortion
+    distortion,
+    isMobile,
+    mobileIntensityMultiplier
   ]);
 
   useEffect(() => {
@@ -353,6 +371,7 @@ void main() {
     u.mouseInfluence.value = mouseInfluence;
     u.noiseAmount.value = noiseAmount;
     u.distortion.value = distortion;
+    u.intensityBoost.value = isMobile ? mobileIntensityMultiplier : 1.0;
 
     const { clientWidth: wCSS, clientHeight: hCSS } = containerRef.current;
     const dpr = renderer.dpr;
@@ -370,7 +389,9 @@ void main() {
     saturation,
     mouseInfluence,
     noiseAmount,
-    distortion
+    distortion,
+    isMobile,
+    mobileIntensityMultiplier
   ]);
 
   useEffect(() => {
@@ -391,7 +412,7 @@ void main() {
   return (
     <div
       ref={containerRef}
-      className={`w-full h-full pointer-events-none z-[3] overflow-hidden relative ${className}`.trim()}
+      className={`w-full h-full pointer-events-none z-3 overflow-hidden relative ${className}`.trim()}
     />
   );
 };
