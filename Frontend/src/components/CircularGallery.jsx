@@ -658,7 +658,7 @@ function CircularGallery({
           onClick={handleClose}
         >
           <div 
-            className="relative bg-white rounded-2xl max-w-[90vw] max-w-md max-h-[90vh] overflow-auto shadow-2xl mx-4 transition-all duration-300"
+            className="relative bg-white rounded-2xl max-w-[90vw] max-h-[90vh] overflow-auto shadow-2xl mx-4 transition-all duration-300"
             onClick={(e) => e.stopPropagation()}
           >
             <button
@@ -688,7 +688,7 @@ function CircularGallery({
 
 export default function Events() {
   return (
-    <div className="min-h-screen relative pt-20 pb-8 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-900/20 to-transparent">
+    <div className="min-h-screen relative pt-20 pb-8 px-4 sm:px-6 lg:px-8 bg-linear-to-br from-gray-900/20 to-transparent">
       
       {/* Animated Header */}
       <motion.div 
@@ -701,7 +701,7 @@ export default function Events() {
           <Sparkles size={12} /> COEP Gathering 2026 <Sparkles size={12} />
         </h3>
         <h1 className="text-4xl md:text-7xl font-black font-['Syncopate'] text-white uppercase drop-shadow-2xl">
-          Event <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-500">Showcase</span>
+          Event <span className="text-transparent bg-clip-text bg-linear-to-r from-red-500 to-orange-500">Showcase</span>
         </h1>
       </motion.div>
 
@@ -711,8 +711,8 @@ export default function Events() {
           sm:h-[40vh] 
           md:h-[48vh] 
           lg:h-[65vh] 
-          min-h-[520px] 
-          max-h-[780px] 
+          min-h-130 
+          max-h-195 
           -mt-4 sm:mt-0
         ">
         <CircularGallery
