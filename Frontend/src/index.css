@@ -41,6 +41,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 section {
   scroll-margin-top: 90px; /* height of navbar */
