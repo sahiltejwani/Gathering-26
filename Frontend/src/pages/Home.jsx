@@ -54,7 +54,7 @@ const Home = () => {
       setLightRaysOpacity(1);
     }, isMobile ? 2000 : 3000);
 
-    // Logo appears
+    // Logo appears 
     const logoTimer = setTimeout(() => {
       setShowLogo(true);
     }, isMobile ? 4000 : 6000);
@@ -88,6 +88,12 @@ const Home = () => {
 
   return (
     <div className="w-full h-screen relative overflow-hidden bg-black">
+      <div 
+        className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none z-40"
+        style={{
+          background: 'linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.3) 30%, rgba(0,0,0,0.7) 70%, rgba(0,0,0,1) 100%)'
+        }}
+      />
       {/* Light Rays Effect */}
       <div 
         className="absolute inset-0 pointer-events-none transition-opacity ease-in z-10" 

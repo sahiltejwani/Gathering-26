@@ -126,10 +126,6 @@ const TeamsSection = () => {
   return (
     <div className="min-h-svh overflow-hidden bg-fixed bg-no-repeat bg-cover bg-teamsBackground ">
       <div className='mt-20 mb-12 text-5xl font-extrabold tracking-wider text-center text-white uppercase drop-shadow-md font-paperHeader'>
-        <p className='text-[2em]' style={{
-          WebkitTextStroke: "0.01px black",
-          textShadow: "2px 2px 2px black"
-        }}>9th EDITION</p>
         <p style={{
           WebkitTextStroke: "0.01px black",
           textShadow: "2px 2px 2px black"
