@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
 import { Ticket, Calendar, MapPin, Clock } from "lucide-react";
-
+import {motion} from "framer-motion"
 const events = [
   {
     name: "Star Night",
