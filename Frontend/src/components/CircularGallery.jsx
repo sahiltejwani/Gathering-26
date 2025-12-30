@@ -292,10 +292,10 @@ class Media {
     let baseHeight, baseWidth, padding;
     
     if (isMobile) {
-      baseHeight = 360;  // Smaller photos for mobile
-      baseWidth = 260;   // Perfect mobile width
+      baseHeight = 580;  // Smaller photos for mobile
+      baseWidth = 450;   // Perfect mobile width
       padding = 1.2;
-      this.fontSize = 15;
+      this.fontSize = 14;
     } else if (isTablet) {
       baseHeight = 340;
       baseWidth = 250;
@@ -632,7 +632,15 @@ export default function Events() {
   return (
     <div className="min-h-screen relative pt-20 pb-8 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-900/20 to-transparent">
       {/* Responsive container with perfect heights */}
-      <div className="w-full h-[50vh] sm:h-[55vh] md:h-[60vh] lg:h-[65vh] xl:h-[70vh] min-h-[380px] max-h-[650px]">
+      <div className="w-full 
+  h-[42vh] 
+  sm:h-[50vh] 
+  md:h-[58vh] 
+  lg:h-[65vh] 
+  min-h-[320px] 
+  max-h-[650px] 
+  -mt-2 sm:mt-0
+">
         <CircularGallery
           items={events}
           bend={0}

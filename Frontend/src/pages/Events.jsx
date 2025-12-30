@@ -3,10 +3,8 @@ import CircularGallery from '../components/CircularGallery'
 
 const Events = () => {
   return (
-    <div
-      className="min-h-screen relative pt-[80px] pb-8 px-2 sm:px-4 lg:px-8"
-      style={{ background: 'linear-gradient(180deg, rgba(0,0,0,0.1) 0%, transparent 50%)' }}
-    >
+    <div className="min-h-screen relative pt-12 sm:pt-20 pb-6 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-900/20 to-transparent">
+
       {/* Responsive Subtitle */}
       <h3 className="text-center text-gray-600 text-lg sm:text-xl md:text-2xl mb-4 sm:mb-6 tracking-wider">
         - COEP GATHERING -
