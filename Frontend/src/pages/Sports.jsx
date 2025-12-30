@@ -3,20 +3,11 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, EffectCoverflow, Autoplay } from "swiper/modules";
 import { ChevronLeft, ChevronRight, Trophy, Zap } from "lucide-react";
 import { motion } from "framer-motion";
-
+import { sportsData } from "../data/sports";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/effect-coverflow";
-
-const sportsData = [
-  { id: 1, name: "Cricket", img: "https://images.unsplash.com/photo-1531415074968-036ba1b575da?w=800&q=80", type: "Outdoor" },
-  { id: 2, name: "Football", img: "https://images.unsplash.com/photo-1579952363873-27f3bde9be51?w=800&q=80", type: "Outdoor" },
-  { id: 3, name: "Basketball", img: "https://images.unsplash.com/photo-1546519638-68e109498ee2?w=800&q=80", type: "Outdoor" },
-  { id: 4, name: "Badminton", img: "https://images.unsplash.com/photo-1626224583764-847890e045b5?w=800&q=80", type: "Indoor" },
-  { id: 5, name: "Chess", img: "https://images.unsplash.com/photo-1586165368502-1bad197a6461?w=800&q=80", type: "Indoor" },
-  { id: 6, name: "Volleyball", img: "https://images.unsplash.com/photo-1592656094267-764a45160876?w=800&q=80", type: "Outdoor" },
-];
 
 const Sports = () => {
   const swiperRef = useRef(null);
