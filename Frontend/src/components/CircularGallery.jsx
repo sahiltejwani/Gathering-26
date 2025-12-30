@@ -2,6 +2,11 @@ import { Camera, Mesh, Plane, Program, Renderer, Texture, Transform } from 'ogl'
 import { useEffect, useRef, useState } from 'react';
 import { events } from '../data/events';
 
+import React from "react";
+import { motion } from "framer-motion";
+import { Sparkles } from "lucide-react"; // Make sure to install lucide-react
+
+
 function debounce(func, wait) {
   let timeout;
   return function (...args) {
@@ -50,7 +55,7 @@ function createTextTexture(gl, text, fontSize, color = 'black') {
 }
 
 class Title {
-  constructor({ gl, plane, renderer, text, textColor = '#545050', fontSize = 24 }) {
+  constructor({ gl, plane, renderer, text, textColor = '#ffffff', fontSize = 24 }) {
     autoBind(this);
     this.gl = gl;
     this.plane = plane;
@@ -62,47 +67,54 @@ class Title {
   }
   
   createMesh() {
-    const { texture, width, height } = createTextTexture(this.gl, this.text, this.fontSize, this.textColor);
-    const geometry = new Plane(this.gl);
-    const program = new Program(this.gl, {
-      vertex: `
-        attribute vec3 position;
-        attribute vec2 uv;
-        uniform mat4 modelViewMatrix;
-        uniform mat4 projectionMatrix;
-        varying vec2 vUv;
-        void main() {
-          vUv = uv;
-          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-        }
-      `,
-      fragment: `
-        precision highp float;
-        uniform sampler2D tMap;
-        varying vec2 vUv;
-        void main() {
-          vec4 color = texture2D(tMap, vUv);
-          if (color.a < 0.1) discard;
-          gl_FragColor = color;
-        }
-      `,
-      uniforms: { tMap: { value: texture } },
-      transparent: true
-    });
-    
-    this.mesh = new Mesh(this.gl, { geometry, program });
-    const aspect = width / height;
-    
-    // Responsive text sizing & positioning
-    const textHeight = this.plane.scale.y * 0.22;
-    const textWidth = Math.min(textHeight * aspect, this.plane.scale.x * 0.9);
-    this.mesh.scale.set(textWidth, textHeight, 1);
-    
-    // Perfect positioning - closer to card
-    this.mesh.position.y = -this.plane.scale.y * 0.3 - textHeight * 0.10;
-    this.mesh.setParent(this.plane);
-  }
+  const { texture, width, height } = createTextTexture(this.gl, this.text, this.fontSize, this.textColor);
+  const geometry = new Plane(this.gl);
+  const program = new Program(this.gl, {
+    vertex: `
+      attribute vec3 position;
+      attribute vec2 uv;
+      uniform mat4 modelViewMatrix;
+      uniform mat4 projectionMatrix;
+      varying vec2 vUv;
+      void main() {
+        vUv = uv;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+      }
+    `,
+    fragment: `
+      precision highp float;
+      uniform sampler2D tMap;
+      varying vec2 vUv;
+      uniform float uTextOpacity;
+      void main() {
+        vec4 color = texture2D(tMap, vUv);
+        if (color.a < 0.1) discard;
+        gl_FragColor = vec4(color.rgb, color.a * uTextOpacity);
+      }
+    `,
+    uniforms: { 
+      tMap: { value: texture },
+      uTextOpacity: { value: 1.0 }
+    },
+    transparent: true
+  });
+  
+  this.mesh = new Mesh(this.gl, { geometry, program });
+  const aspect = width / height;
+  
+  // 🎯 BIGGER TEXT + PERFECT POSITION
+  const textHeight = this.plane.scale.y * 0.25;  // 25% of card height
+  const textWidth = Math.min(textHeight * aspect, this.plane.scale.x * 0.95);
+  this.mesh.scale.set(textWidth, textHeight, 1);
+  
+  // 🎯 TEXT BELOW IMAGE - VISIBLE!
+  this.mesh.position.y = -this.plane.scale.y * 0.48;  // Perfect spot
+  this.mesh.position.z = 0.05;  // Bring forward
+  this.mesh.setParent(this.plane);
 }
+
+}
+
 
 class Media {
   constructor({
@@ -227,16 +239,58 @@ class Media {
     this.plane.setParent(this.scene);
   }
 
-  createTitle() {
-    this.title = new Title({
-      gl: this.gl,
-      plane: this.plane,
-      renderer: this.renderer,
-      text: this.text,
-      textColor: this.textColor,
-      fontSize: this.fontSize
-    });
-  }
+createTitle() {
+  const { texture, width, height } = createTextTexture(
+    this.gl,
+    this.text,
+    this.fontSize,
+    this.textColor
+  );
+
+  const geometry = new Plane(this.gl);
+  const program = new Program(this.gl, {
+    vertex: `
+      attribute vec3 position;
+      attribute vec2 uv;
+      uniform mat4 modelViewMatrix;
+      uniform mat4 projectionMatrix;
+      varying vec2 vUv;
+      void main() {
+        vUv = uv;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+      }
+    `,
+    fragment: `
+      precision highp float;
+      uniform sampler2D tMap;
+      varying vec2 vUv;
+      void main() {
+        vec4 color = texture2D(tMap, vUv);
+        if (color.a < 0.1) discard;
+        gl_FragColor = color;
+      }
+    `,
+    uniforms: { tMap: { value: texture } },
+    transparent: true
+  });
+
+  this.mesh = new Mesh(this.gl, { geometry, program });
+
+  const aspect = width / height;
+
+  // 🔥 TEXT SIZE
+  const textHeight = this.plane.scale.y * 0.18;
+  const textWidth = Math.min(textHeight * aspect, this.plane.scale.x * 0.9);
+
+  this.mesh.scale.set(textWidth, textHeight, 1);
+
+  // 🔥 POSITION TEXT BELOW IMAGE
+  this.mesh.position.y = -this.plane.scale.y * 0.6;
+  this.mesh.position.z = 0.05;
+
+  this.mesh.setParent(this.plane);
+}
+
 
   update(scroll, direction) {
     this.plane.position.x = this.x - scroll.current - this.extra;
@@ -309,7 +363,10 @@ class Media {
     }
 
     this.scale = Math.min(this.screen.width / 1400, this.screen.height / 900, 1);
-    this.plane.scale.y = (this.viewport.height * baseHeight * this.scale) / this.screen.height;
+    const imageHeight = (this.viewport.height * baseHeight * this.scale) / this.screen.height;
+const textSpace = window.innerWidth < 768 ? 0 : imageHeight * 0.35;
+
+this.plane.scale.y = imageHeight + textSpace;
     this.plane.scale.x = (this.viewport.width * baseWidth * this.scale) / this.screen.width;
     
     this.plane.program.uniforms.uPlaneSizes.value = [this.plane.scale.x, this.plane.scale.y];
@@ -628,19 +685,36 @@ function CircularGallery({
   );
 }
 
+
 export default function Events() {
   return (
     <div className="min-h-screen relative pt-20 pb-8 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-900/20 to-transparent">
+      
+      {/* Animated Header */}
+      <motion.div 
+        initial={{ opacity: 0, y: -20 }} 
+        animate={{ opacity: 1, y: 0 }} 
+        transition={{ duration: 0.8 }}
+        className="text-center mb-8 md:mb-12 w-full"
+      >
+        <h3 className="text-orange-500 tracking-[0.4em] text-[10px] md:text-xs font-bold uppercase mb-3 flex items-center justify-center gap-2">
+          <Sparkles size={12} /> COEP Gathering 2026 <Sparkles size={12} />
+        </h3>
+        <h1 className="text-4xl md:text-7xl font-black font-['Syncopate'] text-white uppercase drop-shadow-2xl">
+          Event <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-500">Showcase</span>
+        </h1>
+      </motion.div>
+
       {/* Responsive container with perfect heights */}
       <div className="w-full 
-  h-[42vh] 
-  sm:h-[50vh] 
-  md:h-[58vh] 
-  lg:h-[65vh] 
-  min-h-[320px] 
-  max-h-[650px] 
-  -mt-2 sm:mt-0
-">
+          h-[32vh] 
+          sm:h-[40vh] 
+          md:h-[48vh] 
+          lg:h-[65vh] 
+          min-h-[520px] 
+          max-h-[780px] 
+          -mt-4 sm:mt-0
+        ">
         <CircularGallery
           items={events}
           bend={0}

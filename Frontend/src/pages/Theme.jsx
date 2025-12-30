@@ -13,7 +13,7 @@ export default function Theme() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-black flex items-center justify-center relative overflow-hidden px-6">
+    <div className="min-h-screen flex items-center justify-center relative overflow-hidden px-6">
       {/* Animated gradient orb following mouse */}
       <div 
         className="fixed w-96 h-96 rounded-full opacity-20 blur-3xl transition-all duration-300 pointer-events-none"
