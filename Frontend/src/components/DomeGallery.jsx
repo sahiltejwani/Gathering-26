@@ -818,7 +818,7 @@ main.sphere-main {
   return (
     <div
       ref={rootRef}
-      className="sphere-root"
+      className="sphere-root mt-5"
       style={{
         ['--segments-x']: segments,
         ['--segments-y']: segments,
