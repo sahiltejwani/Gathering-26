@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Visionboard.css";
+import nightCity from "../assets/night-city.mp4";
 
 const images = [
   "https://images.unsplash.com/photo-1544005313-94ddf0286df2",
@@ -23,7 +24,18 @@ const Visionboard = () => {
   const [activeImg, setActiveImg] = useState(null);
 
   return (
-    <>
+    <div className="video-bg-wrapper">
+
+      <video
+        className="bg-video"
+        src={nightCity}
+        autoPlay
+        loop
+        muted
+        playsInline
+      />
+      <div className="video-overlay"></div>
+
       <section className="gallery-wrapper">
         <h1>Anandotsav</h1>
         <p>Where Cultures Unite</p>
@@ -41,13 +53,12 @@ const Visionboard = () => {
         </div>
       </section>
 
-      {/* Lightbox */}
       {activeImg && (
         <div className="lightbox" onClick={() => setActiveImg(null)}>
           <img src={activeImg} alt="enlarged" />
         </div>
       )}
-    </>
+    </div>
   );
 };
 
