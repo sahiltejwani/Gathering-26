@@ -1,164 +1,151 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { gsap } from 'gsap';
-import { team } from '../data/team';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInstagram, faLinkedin } from '@fortawesome/free-brands-svg-icons';
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Linkedin, Instagram, Sparkles, User } from 'lucide-react';
+import teamData  from '../data/team.json'; 
 
-
-const TeamCard = ({ image, name, role, instagram, linkedin }) => {
-  const cardRef = useRef(null);
-  const containerRef = useRef(null);
-  const [isActive, setIsActive] = useState(false);
-  
-  console.log(instagram);
-  
-  useEffect(() => {
-    const card = cardRef.current;
-    const container = containerRef.current;
-
-    const handleMouseMove = (e) => {
-      if (!container) return;
-
-      const rect = container.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
-      const mouseX = e.clientX - centerX;
-      const mouseY = e.clientY - centerY;
-
-      // 3D Tilt Effect
-      gsap.to(card, {
-        rotationX: -mouseY / 20,
-        rotationY: mouseX / 20,
-        transformPerspective: 500,
-        ease: 'power1.out',
-        duration: 0.6
-      });
-    };
-
-    const handleMouseLeave = () => {
-      // Reset to original position
-      gsap.to(card, {
-        rotationX: 0,
-        rotationY: 0,
-        transformPerspective: 500,
-        ease: 'power1.out',
-        duration: 0.6
-      });
-    };
-
-    // Add event listeners
-    container.addEventListener('mousemove', handleMouseMove);
-    container.addEventListener('mouseleave', handleMouseLeave);
-
-    // Cleanup
-    return () => {
-      container.removeEventListener('mousemove', handleMouseMove);
-      container.removeEventListener('mouseleave', handleMouseLeave);
-    };
-  }, []);
-
-  const handleClick = () => {
-    setIsActive(!isActive);
-  };
-
+const Team = () => {
   return (
-    <div
-      ref={containerRef}
-      onClick={handleClick}
-      className="w-64 perspective-800 h-96 group border-blackx cursor-pointer"
-    >
-      <div
-        ref={cardRef}
-        className="relative w-full h-full transition-transform duration-300 ease-out transform-style-3d backface-hidden"
-      >
-        {/* Card Background */}
-        <div
-          className={`absolute inset-0 transition-all duration-300 bg-center bg-cover shadow-lg shadow-black rounded-xl filter ${
-            isActive ? 'brightness-50' : 'brightness-75 group-hover:brightness-50'
-          }`}
-          style={{ backgroundImage: `url(${image})` }}
-        />
-
-        {/* Card Overlay */}
-        <div className={`absolute inset-0 transition-opacity duration-300 bg-linear-to-b from-transparent to-black/70 rounded-xl ${
-          isActive ? 'opacity-100' : 'opacity-20 group-hover:opacity-100'
-        }`} />
-
-        {/* Card Content */}
-        <div className={`absolute bottom-0 left-0 right-0 p-6 text-white transition-all duration-300 transform ${
-          isActive ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0 group-hover:translate-y-0 group-hover:opacity-100'
-        }`}>
-          <h3 className="mb-1 text-xl font-bold">{name}</h3>
-          <p className="text-sm text-white/80">{role}</p>
-
-          {/* Social Media Links */}
-          <div className="flex mt-2 space-x-3">
-            {instagram && (
-              <a
-                href={instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white transition-colors hover:text-pink-400"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <FontAwesomeIcon icon={faInstagram} className="text-xl" />
-              </a>
-            )}
-            {linkedin && (
-              <a
-                href={linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white transition-colors hover:text-blue-500"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <FontAwesomeIcon icon={faLinkedin} className="text-xl" />
-              </a>
-            )}
-          </div>
-        </div>
+    <div className="min-h-screen relative bg-black overflow-x-hidden pt-28 pb-20">
+      
+      {/* --- Ambient Background --- */}
+      <div className="fixed inset-0 pointer-events-none">
+         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-100 bg-linear-to-b from-red-900/20 to-transparent blur-[100px]" />
+         <div className="absolute bottom-0 right-0 w-125 h-125 bg-orange-900/10 rounded-full blur-[120px]" />
+         <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10" />
       </div>
+
+      {/* --- Header --- */}
+      <div className="relative z-10 text-center mb-16 px-4">
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="flex flex-col items-center"
+        >
+            <h3 className="text-orange-500 tracking-[0.3em] text-[10px] md:text-xs font-bold uppercase mb-4 flex items-center gap-2">
+                <Sparkles size={12} /> The Creators <Sparkles size={12} />
+            </h3>
+            <h1 className="text-4xl md:text-7xl font-black font-['Syncopate'] text-white uppercase drop-shadow-lg text-center leading-tight">
+                Our <span className="text-transparent bg-clip-text bg-linear-to-r from-red-500 to-orange-500">Core Team</span>
+            </h1>
+            <div className="w-24 h-1 bg-linear-to-r from-transparent via-orange-500 to-transparent mt-6 rounded-full" />
+        </motion.div>
+      </div>
+
+      {/* --- Main Content --- */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8 space-y-24">
+        {teamData.teamSections.map((section, idx) => (
+          <TeamSection key={idx} section={section} index={idx} />
+        ))}
+      </div>
+
     </div>
   );
 };
 
-const TeamsSection = () => {
+// --- Section Component ---
+const TeamSection = ({ section, index }) => {
   return (
-    <div className="min-h-svh overflow-hidden bg-fixed bg-no-repeat bg-cover bg-teamsBackground ">
-      <div className='mt-20 mb-12 text-5xl font-extrabold tracking-wider text-center text-white uppercase drop-shadow-md font-paperHeader'>
-        <p style={{
-          WebkitTextStroke: "0.01px black",
-          textShadow: "2px 2px 2px black"
-        }}>CORE TEAM</p>
-      </div>
-      <div className="px-4 overflow-hidden">
-        {team.map((section, sectionIndex) => (
-          <div key={sectionIndex} className={sectionIndex < team.length - 1 ? 'mb-40' : 'mb-10'}>
-            <h2
-              className="mb-12 text-3xl font-extrabold tracking-wider text-center text-white uppercase md:text-5xl drop-shadow-md"
-              style={{
-                WebkitTextStroke: "1px grey",
-              }}
-            >
-              {section.title}
-            </h2>
-            <div className="flex flex-col items-center space-y-8 md:flex-row md:justify-center md:space-y-0 md:space-x-8 ">
-              {section.members.map((member, memberIndex) => (
-                <TeamCard
-                  key={`${sectionIndex}-${memberIndex}`}
-                  image={member.image}
-                  name={member.name}
-                  role={member.role}
-                  instagram={member.instagram}
-                  linkedin={member.linkedin}
-                />
-              ))}
-            </div>
-          </div>
+    <div className="w-full flex flex-col items-center">
+      
+      {/* Section Title (Centered) */}
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ duration: 0.5 }}
+        className="flex items-center justify-center gap-4 mb-10 w-full max-w-2xl"
+      >
+         <div className="h-px flex-1 bg-linear-to-r from-transparent to-white/20" />
+         <h2 className="text-2xl md:text-4xl font-bold text-white font-['Syncopate'] uppercase text-center tracking-wide">
+           {section.title}
+         </h2>
+         <div className="h-px flex-1 bg-linear-to-r from-white/20 to-transparent" />
+      </motion.div>
+
+      {/* LAYOUT FIX: 
+         Changed from 'grid' to 'flex' with 'justify-center'.
+         This centers the cards even if there are only 2 items in a row.
+      */}
+      <div className="flex flex-wrap justify-center gap-6 md:gap-10 w-full">
+        {section.members.map((member, idx) => (
+          <MemberCard key={idx} member={member} index={idx} />
         ))}
       </div>
     </div>
   );
 };
 
-export default TeamsSection;
+// --- Compact Card Component ---
+const MemberCard = ({ member, index }) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.4, delay: index * 0.05 }}
+      // WIDTH CONTROL:
+      // w-[45%]: fits 2 cards per row on small screens (with gap).
+      // md:w-[280px]: fixed width on desktop for uniformity.
+      className="group relative w-[45%] md:w-70 aspect-4/5 bg-[#0a0a0a] rounded-xl overflow-hidden border border-white/10 hover:border-orange-500/50 transition-all duration-300 shadow-lg"
+    >
+      
+      {/* Image Layer */}
+      <div className="absolute inset-0 bg-gray-900">
+        {member.image ? (
+            <img
+            src={member.image}
+            alt={member.name}
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 filter grayscale-[0.3] group-hover:grayscale-0"
+            />
+        ) : (
+            <div className="w-full h-full flex items-center justify-center bg-white/5">
+                <User size={40} className="text-white/20" />
+            </div>
+        )}
+        
+        {/* Gradients */}
+        <div className="absolute inset-0 bg-linear-to-t from-black via-black/20 to-transparent opacity-90" />
+        <div className="absolute inset-0 bg-linear-to-t from-orange-900/60 to-transparent opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 mix-blend-overlay" />
+      </div>
+
+      {/* Content Layer */}
+      <div className="absolute bottom-0 left-0 w-full p-3 md:p-5 flex flex-col items-center text-center">
+        
+        <h3 className="text-sm md:text-lg font-bold text-white font-['Syncopate'] leading-tight group-hover:text-orange-400 transition-colors w-full truncate px-1">
+          {member.name}
+        </h3>
+        
+        <p className="text-[10px] md:text-xs text-gray-400 font-bold tracking-widest uppercase mt-1 mb-2 md:mb-3">
+          {member.role}
+        </p>
+
+        {/* Social Icons Logic: 
+            - Mobile: Visible & Centered
+            - Desktop: Hidden, slide up on hover
+        */}
+        <div className="flex gap-4 justify-center overflow-hidden transition-all duration-300
+                        h-auto opacity-100 
+                        md:h-0 md:opacity-0 md:group-hover:h-auto md:group-hover:opacity-100">
+          
+          {member.linkedin && (
+            <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition-colors hover:scale-110">
+              <Linkedin size={16} />
+            </a>
+          )}
+          {member.instagram && (
+            <a href={member.instagram} target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition-colors hover:scale-110">
+              <Instagram size={16} />
+            </a>
+          )}
+        </div>
+      </div>
+
+      {/* Decorative Corner */}
+      <div className="absolute top-2 right-2 md:top-3 md:right-3 w-2 h-2 border-t border-r border-orange-500 opacity-50 group-hover:opacity-100 transition-opacity" />
+
+    </motion.div>
+  );
+};
+
+export default Team;
