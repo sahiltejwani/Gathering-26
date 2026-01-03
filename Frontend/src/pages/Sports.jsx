@@ -67,7 +67,7 @@ const Sports = () => {
           breakpoints={{
             320: { slidesPerView: 1.2, spaceBetween: 20 }, // Mobile: Peeking slides
             640: { slidesPerView: 2, spaceBetween: 30 },
-            1024: { slidesPerView: 3, spaceBetween: 60 },
+            1024: { slidesPerView: 3.5, spaceBetween: 40 },
           }}
           coverflowEffect={{
             rotate: 0,

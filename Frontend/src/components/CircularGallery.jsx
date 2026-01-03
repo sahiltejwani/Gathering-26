@@ -357,7 +357,7 @@ createTitle() {
       this.fontSize = 22;
     } else {
       baseHeight = 420;
-      baseWidth = 320;
+      baseWidth = 460;
       padding = 2.2;
       this.fontSize = 28;
     }
