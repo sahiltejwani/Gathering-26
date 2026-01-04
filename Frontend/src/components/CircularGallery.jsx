@@ -671,6 +671,8 @@ function CircularGallery({
             <img
               src={selectedEvent.image}
               alt={selectedEvent.text}
+                loading="lazy"
+                decoding="async"
               className="w-full h-64 sm:h-72 md:h-80 object-cover rounded-t-2xl"
             />
             

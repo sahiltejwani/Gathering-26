@@ -75,6 +75,7 @@ const TeamSection = ({ section }) => {
         ))}
       </div>
     </div>
+    
   );
 };
 
@@ -101,6 +102,7 @@ const MemberCard = ({ member, index }) => {
           <img
             src={member.image}
             alt={member.name}
+             loading="lazy" decoding="async"
             className="
               w-full h-full object-cover
               transition-all duration-700

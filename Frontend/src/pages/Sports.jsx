@@ -89,6 +89,7 @@ const Sports = () => {
                     <img
                       src={item.img}
                       alt={item.name}
+                       loading="lazy" decoding="async"
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100"
                     />
                     {/* Gradient Overlay */}
