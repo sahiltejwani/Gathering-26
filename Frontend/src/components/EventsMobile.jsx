@@ -51,6 +51,7 @@ const EventsMobile = () => {
         >
           <img
             src={activeEvent.image}
+            loading="lazy" decoding="async" //
             className="w-full h-full object-cover blur-[100px] scale-110"
             alt=""
           />
@@ -100,6 +101,7 @@ const EventsMobile = () => {
             <img
               src={activeEvent.image}
               alt={activeEvent.text}
+               loading="lazy" decoding="async"
               className="w-full h-[65%] object-cover opacity-70"
             />
 

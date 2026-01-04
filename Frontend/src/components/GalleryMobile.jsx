@@ -56,6 +56,7 @@ const sizeClass =
       <img
         src={img.src}
         alt={img.alt}
+         loading="lazy" decoding="async"
         className="
           w-full h-full object-cover
           shadow-[0_15px_35px_rgba(0,0,0,0.6)]
@@ -82,6 +83,7 @@ const sizeClass =
           <img
             src={activeImg}
             alt="preview"
+             loading="lazy" decoding="async"
             className="max-h-[90%] max-w-[90%] rounded-2xl shadow-2xl animate-[zoomIn_0.3s_ease]"
           />
         </div>

@@ -6,16 +6,21 @@ const Home = () => {
   const [showLogo, setShowLogo] = useState(false);
   const [showTagline, setShowTagline] = useState(false);
   const [hasPlayedVideo, setHasPlayedVideo] = useState(false);
+
   const videoRef = useRef(null);
   const mobileTimerRef = useRef(null);
 
-  useEffect(() => {
-    const videoPlayed = sessionStorage.getItem('homeVideoPlayed');
+  // 🔹 Animation pause/resume refs
+  const animationStartRef = useRef(null);
+  const pausedAtRef = useRef(null);
+  const remainingTimersRef = useRef({});
 
-    // Check if device is mobile based on screen width
+  /* ---------------- INITIAL LOAD LOGIC (UNCHANGED) ---------------- */
+  useEffect(() => {
+    const videoPlayed = sessionStorage.getItem("homeVideoPlayed");
     const isMobile = window.innerWidth <= 768;
 
-    if (videoPlayed === 'true') {
+    if (videoPlayed === "true") {
       setHasPlayedVideo(true);
       setLightRaysOpacity(1);
       setShowLogo(true);
@@ -23,84 +28,139 @@ const Home = () => {
 
       if (videoRef.current) {
         const setToEnd = () => {
-          if (videoRef.current) {
-            videoRef.current.currentTime = videoRef.current.duration;
-            videoRef.current.pause();
-          }
+          videoRef.current.currentTime = videoRef.current.duration;
+          videoRef.current.pause();
         };
 
         if (videoRef.current.readyState >= 2) {
           setToEnd();
         } else {
-          videoRef.current.addEventListener('loadedmetadata', setToEnd);
+          videoRef.current.addEventListener("loadedmetadata", setToEnd);
         }
       }
       return;
     }
 
-    // Set up mobile video timer - stop after 7 seconds
+    // Mobile video cutoff
     if (isMobile) {
       mobileTimerRef.current = setTimeout(() => {
         if (videoRef.current) {
           videoRef.current.pause();
-          sessionStorage.setItem('homeVideoPlayed', 'true');
+          sessionStorage.setItem("homeVideoPlayed", "true");
           setHasPlayedVideo(true);
         }
       }, 7000);
     }
 
-    // Light rays fade in - starts earlier on mobile for better visibility
-    const fadeTimer = setTimeout(() => {
-      setLightRaysOpacity(1);
-    }, isMobile ? 2000 : 3000);
+    /* ---------------- PAUSABLE ANIMATIONS ---------------- */
+    const timings = {
+      light: isMobile ? 2000 : 3000,
+      logo: isMobile ? 4000 : 7000,
+      tagline: isMobile ? 5000 : 8000,
+    };
 
-    // Logo appears 
-    const logoTimer = setTimeout(() => {
-      setShowLogo(true);
-    }, isMobile ? 4000 : 6000);
+    animationStartRef.current = Date.now();
 
-    // Tagline appears
-    const taglineTimer = setTimeout(() => {
-      setShowTagline(true);
-    }, isMobile ? 5000 : 7000);
+    const startTimers = (offset = 0) => {
+      remainingTimersRef.current.light = setTimeout(
+        () => setLightRaysOpacity(1),
+        Math.max(0, timings.light - offset)
+      );
+
+      remainingTimersRef.current.logo = setTimeout(
+        () => setShowLogo(true),
+        Math.max(0, timings.logo - offset)
+      );
+
+      remainingTimersRef.current.tagline = setTimeout(
+        () => setShowTagline(true),
+        Math.max(0, timings.tagline - offset)
+      );
+    };
+
+    startTimers();
 
     return () => {
-      clearTimeout(fadeTimer);
-      clearTimeout(logoTimer);
-      clearTimeout(taglineTimer);
-      if (mobileTimerRef.current) {
-        clearTimeout(mobileTimerRef.current);
-      }
+      Object.values(remainingTimersRef.current).forEach(clearTimeout);
+      if (mobileTimerRef.current) clearTimeout(mobileTimerRef.current);
     };
   }, []);
 
-  const handleVideoEnd = () => {
-    if (videoRef.current) {
-      videoRef.current.pause();
-    }
-    sessionStorage.setItem('homeVideoPlayed', 'true');
-    setHasPlayedVideo(true);
+  /* ---------------- TAB VISIBILITY PAUSE / RESUME ---------------- */
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        // ⏸ Pause
+        pausedAtRef.current = Date.now();
+        Object.values(remainingTimersRef.current).forEach(clearTimeout);
+      } else {
+        // ▶ Resume
+        if (!animationStartRef.current || !pausedAtRef.current) return;
 
-    if (mobileTimerRef.current) {
-      clearTimeout(mobileTimerRef.current);
-    }
+        const elapsed =
+          pausedAtRef.current - animationStartRef.current;
+
+        animationStartRef.current = Date.now() - elapsed;
+
+        const isMobile = window.innerWidth <= 768;
+        const timings = {
+          light: isMobile ? 2000 : 3000,
+          logo: isMobile ? 4000 : 6000,
+          tagline: isMobile ? 5000 : 7000,
+        };
+
+        if (!showLogo) {
+          remainingTimersRef.current.logo = setTimeout(
+            () => setShowLogo(true),
+            Math.max(0, timings.logo - elapsed)
+          );
+        }
+
+        if (!showTagline) {
+          remainingTimersRef.current.tagline = setTimeout(
+            () => setShowTagline(true),
+            Math.max(0, timings.tagline - elapsed)
+          );
+        }
+
+        if (lightRaysOpacity === 0) {
+          remainingTimersRef.current.light = setTimeout(
+            () => setLightRaysOpacity(1),
+            Math.max(0, timings.light - elapsed)
+          );
+        }
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    return () =>
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+  }, [showLogo, showTagline, lightRaysOpacity]);
+
+  /* ---------------- VIDEO END ---------------- */
+  const handleVideoEnd = () => {
+    if (videoRef.current) videoRef.current.pause();
+    sessionStorage.setItem("homeVideoPlayed", "true");
+    setHasPlayedVideo(true);
+    if (mobileTimerRef.current) clearTimeout(mobileTimerRef.current);
   };
 
+  /* ---------------- RENDER ---------------- */
   return (
     <div className="w-full h-screen relative overflow-hidden bg-black">
-      <div 
+      {/* Bottom gradient */}
+      <div
         className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none z-40"
         style={{
-          background: 'linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.3) 30%, rgba(0,0,0,0.7) 70%, rgba(0,0,0,1) 100%)'
+          background:
+            "linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.3) 30%, rgba(0,0,0,0.7) 70%, rgba(0,0,0,1) 100%)",
         }}
       />
-      {/* Light Rays Effect */}
-      <div 
-        className="absolute inset-0 pointer-events-none transition-opacity ease-in z-10" 
-        style={{ 
-          opacity: lightRaysOpacity,
-          transitionDuration: '2000ms'
-        }}
+
+      {/* Light Rays */}
+      <div
+        className="absolute inset-0 pointer-events-none z-10 transition-opacity"
+        style={{ opacity: lightRaysOpacity, transitionDuration: "2000ms" }}
       >
         <LightRays
           raysOrigin="top-center"
@@ -108,29 +168,30 @@ const Home = () => {
           raysSpeed={1.5}
           lightSpread={0.8}
           rayLength={1.2}
-          followMouse={true}
+          followMouse
           mouseInfluence={0.1}
           noiseAmount={0.1}
           distortion={0.05}
-          className="custom-rays"
           mobileIntensityMultiplier={3.0}
         />
       </div>
 
       {/* Logo */}
       <div
-        className="absolute top-1/2 left-[47%] transition-all ease-out z-30"
+        className="absolute top-1/2 left-[47%] z-30 transition-all ease-out"
         style={{
           transform: showLogo
             ? "translate(-50%, -60%)"
             : "translate(-50%, -50%)",
           opacity: showLogo ? 1 : 0,
-          transitionDuration: '1500ms'
+          transitionDuration: "1500ms",
         }}
       >
-        <img 
-          src="/Logotext.png" 
-          alt="Logo" 
+        <img
+          src="/Logotext.png"
+          alt="Logo"
+          loading="lazy"
+          decoding="async"
           className="w-125 max-w-[80vw]"
         />
       </div>
@@ -160,8 +221,8 @@ const Home = () => {
         autoPlay={!hasPlayedVideo}
         muted
         playsInline
-        onEnded={handleVideoEnd}
         preload="metadata"
+        onEnded={handleVideoEnd}
         className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none"
       >
         <source src="/curtains.mp4" type="video/mp4" />
