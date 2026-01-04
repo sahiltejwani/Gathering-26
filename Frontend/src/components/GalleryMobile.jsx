@@ -1,22 +1,17 @@
 import React, { useState } from "react";
 
-const images = [
-  "https://images.unsplash.com/photo-1544005313-94ddf0286df2",
-  "https://images.unsplash.com/photo-1529634806980-85c3dd6d34ac",
-  "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee",
-  "https://images.unsplash.com/photo-1497032628192-86f99bcd76bc",
-  "https://images.unsplash.com/photo-1508609349937-5ec4ae374ebf",
-  "https://images.unsplash.com/photo-1520974735194-6c5f2f67fa0a",
-  "https://images.unsplash.com/photo-1520975916090-3105956dac38",
-  "https://images.unsplash.com/photo-1519682337058-a94d519337bc",
-  "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f",
-  "https://images.unsplash.com/photo-1492684223066-81342ee5ff30",
-  "https://images.unsplash.com/photo-1500534314209-a26db0f5c8b3",
-  "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c",
-  "https://images.unsplash.com/photo-1514516870926-206e0e25904e",
-  "https://images.unsplash.com/photo-1517841905240-472988babdf9",
-  "https://images.unsplash.com/photo-1500534623283-312aade485b7",
-];
+
+
+const TOTAL_IMAGES = 28;
+const PICK_COUNT = 16;
+
+const images = Array.from({ length: TOTAL_IMAGES }, (_, i) => ({
+  src: `/images/gallery/gal-${i + 1}.jpg`,
+  alt: `Gallery image ${i + 1}`,
+}))
+  .sort(() => Math.random() - 0.5) // shuffle
+  .slice(0, PICK_COUNT);           // pick any 15
+
 
 const GalleryMobile = () => {
   const [activeImg, setActiveImg] = useState(null);
@@ -33,28 +28,49 @@ const GalleryMobile = () => {
           Where Cultures Unite
         </p>
 
-        <div className="mx-auto max-w-6xl columns-2 gap-4 md:columns-4 md:gap-6">
-          {images.map((src, index) => (
-            <div
-              key={index}
-              onClick={() => setActiveImg(src)}
-              className="mb-4 break-inside-avoid cursor-pointer"
-            >
-              <img
-                src={src}
-                alt={`gallery-${index}`}
-                className="
-                  w-full rounded-2xl
-                  shadow-[0_15px_35px_rgba(0,0,0,0.6)]
-                  transition-all duration-300
-                  hover:scale-[1.03]
-                  hover:brightness-110
-                  hover:shadow-[0_0_35px_rgba(245,193,108,0.5)]
-                "
-              />
-            </div>
-          ))}
-        </div>
+        <div
+  className="mx-auto max-w-6xl grid auto-rows-[120px] grid-cols-2 gap-4"
+  style={{ gridAutoFlow: "dense" }}
+>
+  {images.map((img, index) => {
+  // pseudo-random but consistent sizing
+const variant = index % 5;
+
+const sizeClass =
+  variant === 0
+    ? "row-span-1 col-span-1"   // small
+    : variant === 1
+    ? "row-span-2 col-span-1"   // tall
+    : variant === 2
+    ? "row-span-1 col-span-2"   // wide
+    : "row-span-1 col-span-1";  // small
+
+
+
+  return (
+    <div
+      key={index}
+      onClick={() => setActiveImg(img.src)}
+      className={`cursor-pointer overflow-hidden rounded-2xl ${sizeClass}`}
+    >
+      <img
+        src={img.src}
+        alt={img.alt}
+        className="
+          w-full h-full object-cover
+          shadow-[0_15px_35px_rgba(0,0,0,0.6)]
+          transition-all duration-500
+          hover:scale-[1.06]
+          hover:brightness-110
+          hover:shadow-[0_0_40px_rgba(245,193,108,0.45)]
+        "
+      />
+    </div>
+  );
+})}
+
+</div>
+
       </section>
 
       {/* LIGHTBOX */}

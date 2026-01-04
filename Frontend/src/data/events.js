@@ -27,7 +27,7 @@ export const events = [
     text: "Variety Show",
     description:
       "An entertaining mix of performances including singing, dancing, comedy, and unique talents.",
-    image: "/images/events/variety.jpg",
+    image: "/images/events/variety.png",
   },
   {
     id: 5,

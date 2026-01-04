@@ -2,38 +2,27 @@
 
 export const passes = [
   {
-    name: "Star Night",
-    time: "7:00 PM",
-    venue: "Main Stage",
-    desc: "Celebrity performances, band showdown, and a dazzling light show.",
-    image: "https://images.pexels.com/photos/1190297/pexels-photo-1190297.jpeg?auto=compress&cs=tinysrgb&w=800"
+    name: "Musical Night",
+    venue: "Main Auditorium",
+    desc: "An electrifying night filled with live bands, soulful music, and high-energy performances that bring the gathering alive.",
+    image: "/images/events/musicalnight.jpg",
   },
   {
-    name: "Tech Expo",
-    time: "11:00 AM",
-    venue: "Innovation Hall",
-    desc: "Showcase of projects, AR/VR zone, and live tech demos.",
-    image: "https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=800"
+    name: "Drama",
+    venue: "Main Auditorium",
+    desc: "Captivating stage performances showcasing powerful storytelling, emotions, and impactful social themes.",
+    image: "/images/events/drama.jpg",
   },
   {
-    name: "Cultural Fiesta",
-    time: "4:00 PM",
-    venue: "Open Arena",
-    desc: "Dance, drama, and folk performances from across the country.",
-    image: "https://images.pexels.com/photos/1190298/pexels-photo-1190298.jpeg?auto=compress&cs=tinysrgb&w=800"
+    name: "Variety Show",
+    venue: "Main Auditorium",
+    desc: "A fun-filled showcase of diverse talents including dance, comedy, music, and unique performances by students.",
+    image: "/images/events/btechdance.png",
   },
   {
-    name: "Gaming Arena",
-    time: "1:00 PM",
-    venue: "Lab Block",
-    desc: "E-sports tournaments, casual gaming zone, and mini-prizes.",
-    image: "https://images.pexels.com/photos/786244/pexels-photo-786244.jpeg?auto=compress&cs=tinysrgb&w=800"
+    name: "Refreshment",
+    venue: "Main Auditorium",
+    desc: "A dedicated refreshment area offering a wide range of food and beverages to keep the energy high throughout the event.",
+    image: "/images/events/refreshment.jpeg",
   },
-  {
-    name: "Art & Open Mic",
-    time: "3:00 PM",
-    venue: "Studio Lounge",
-    desc: "Live music, poetry, stand-up, and art exhibition corners.",
-    image: "https://images.pexels.com/photos/164745/pexels-photo-164745.jpeg?auto=compress&cs=tinysrgb&w=800"
-  }
 ];

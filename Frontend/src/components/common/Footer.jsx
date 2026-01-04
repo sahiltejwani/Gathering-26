@@ -49,11 +49,11 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-2">
                 <Mail size={16} className="text-red-500 shrink-0" />
-                <a href="mailto:gathering@coep.ac.in" className="hover:text-white text-xs md:text-sm text-gray-400">gathering@coep.ac.in</a>
+                <a href="mailto:gathering@coep.ac.in" className="hover:text-white text-xs md:text-sm text-gray-400">  gathering_secretary@coeptech.ac.in</a>
               </li>
               <li className="flex items-center gap-2">
                 <Phone size={16} className="text-red-500 shrink-0" />
-                <span className="text-xs md:text-sm text-gray-400">+91 12345 67890</span>
+                <span className="text-xs md:text-sm text-gray-400">+91 72700 68007</span>
               </li>
             </ul>
           </div>
@@ -62,10 +62,10 @@ export default function Footer() {
           <div className="col-span-2 md:col-span-1 lg:col-span-1">
             <h4 className="text-white font-bold tracking-widest uppercase mb-4 text-xs md:text-sm">Follow Us</h4>
             <div className="flex gap-3">
-              {[Instagram, Linkedin, Twitter].map((Icon, index) => (
+              {[Instagram].map((Icon, index) => (
                 <a 
                   key={index} 
-                  href="#" 
+                  href="https://www.instagram.com/coep.gathering_26?igsh=eDNlcW51ZHhncWd5" 
                   className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-orange-600 hover:text-white hover:border-orange-600 transition-all duration-300"
                 >
                   <Icon size={16} />
