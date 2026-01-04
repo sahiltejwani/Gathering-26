@@ -41,7 +41,6 @@ const Passes = () => {
           <EventCard key={index} event={event} index={index} />
         ))}
       </div>
-
     </div>
   );
 };
@@ -93,10 +92,17 @@ const EventCard = ({ event, index }) => {
         </p>
 
         {/* Button */}
-        <button className="w-full py-3 rounded-xl bg-white/5 border border-white/10 text-white font-bold tracking-widest uppercase hover:bg-linear-to-r hover:from-red-600 hover:to-orange-600 hover:border-transparent transition-all duration-300 flex items-center justify-center gap-2 group-hover:shadow-[0_0_20px_rgba(220,38,38,0.4)]">
-          <Ticket size={18} />
-          Get Passes
-        </button>
+        <a
+  href="https://www.pass-distribution.sdscoeptech.club/"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="w-full"
+>
+  <button className="w-full py-3 rounded-xl bg-white/5 border border-white/10 text-white font-bold tracking-widest uppercase hover:bg-linear-to-r hover:from-red-600 hover:to-orange-600 hover:border-transparent transition-all duration-300 flex items-center justify-center gap-2 group-hover:shadow-[0_0_20px_rgba(220,38,38,0.4)]">
+    <Ticket size={18} />
+    Get Passes
+  </button>
+</a>
       </div>
     </motion.div>
   );
