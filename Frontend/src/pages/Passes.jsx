@@ -123,76 +123,71 @@ export default function Passes() {
           }}
         />
       </div>
-
-      
-      <div className="relative z-10 max-w-7xl mx-auto">
-
-        {/* Header */}
-        <div className="text-center mb-20">
-          <div className="flex justify-center gap-4 mb-4">
-            <Sparkles className="text-orange-500" />
-            <span className="px-4 py-1 text-xs uppercase tracking-widest rounded-full bg-red-500/10 border border-red-500/20">
-              Annual Gathering 2026
-            </span>
-            <Sparkles className="text-red-500" />
-          </div>
-
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-red-200 to-gray-400">
-            Event Passes
-          </h1>
-
-          <p className="text-gray-300 text-lg max-w-2xl mx-auto">
-            Pick your favorite events and grab your{" "}
-            <span className="text-orange-500 font-semibold">Get Pass</span>.
-          </p>
-        </div>
-
-        {/* Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {passes.map((event, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.15 }}
-              whileHover={{ y: -8 }}
-              className="bg-[#0a0a0a] border border-white/5 rounded-2xl overflow-hidden hover:border-red-500/50 transition-all"
-            >
-              <div className="h-48 overflow-hidden">
-                <img
-                  src={event.image}
-                  alt={event.name}
-                  className="w-full h-full object-cover opacity-85 hover:opacity-100 transition"
-                />
-              </div>
-
-              <div className="p-6">
-                <h3 className="text-2xl font-bold mb-3">{event.name}</h3>
-
-                <div className="flex gap-4 text-sm text-gray-400 mb-4">
-                  <div className="flex items-center gap-1">
-                    <Clock size={16} className="text-orange-500" />
-                    {event.time}
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <MapPin size={16} className="text-orange-500" />
-                    {event.venue}
-                  </div>
-                </div>
-
-                <p className="text-gray-500 text-sm mb-6">{event.desc}</p>
-
-                <button className="w-full py-3 rounded-xl bg-white/5 border border-white/10 hover:bg-gradient-to-r hover:from-red-600 hover:to-orange-600 transition">
-                  <span className="flex items-center justify-center gap-2">
-                    <Ticket size={18} /> Get Passes
-                  </span>
-                </button>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </div>
     </div>
   );
-}
+};
+
+// --- Sub-Component: Event Card ---
+const EventCard = ({ event, index }) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      className="group relative bg-[#0a0a0a] border border-white/5 rounded-2xl overflow-hidden hover:border-red-500/50 transition-colors duration-300 flex flex-col"
+    >
+      {/* Image Container */}
+      <div className="relative h-48 overflow-hidden">
+        <div className="absolute inset-0 bg-linear-to-t from-[#0a0a0a] via-transparent to-transparent z-10" />
+        <img 
+          src={event.image} 
+          alt={event.name} 
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100"
+        />
+        {/* Category Tag */}
+        <div className="absolute top-4 right-4 z-20 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/10">
+          <span className="text-xs font-bold text-white uppercase tracking-wider">2026</span>
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className="p-6 flex flex-col grow">
+        <h3 className="text-2xl font-bold font-['Syncopate'] text-white mb-4 group-hover:text-red-500 transition-colors">
+          {event.name}
+        </h3>
+        
+        {/* Info Row */}
+        <div className="flex items-center gap-4 text-sm text-gray-400 mb-4">
+          <div className="flex items-center gap-1.5">
+            <Clock size={16} className="text-orange-500" />
+            <span>{event.time}</span>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <MapPin size={16} className="text-orange-500" />
+            <span>{event.venue}</span>
+          </div>
+        </div>
+
+        <p className="text-gray-500 text-sm leading-relaxed mb-6 grow">
+          {event.desc}
+        </p>
+
+        {/* Button */}
+        <a
+  href="https://www.pass-distribution.sdscoeptech.club/"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="w-full"
+>
+  <button className="w-full py-3 rounded-xl bg-white/5 border border-white/10 text-white font-bold tracking-widest uppercase hover:bg-linear-to-r hover:from-red-600 hover:to-orange-600 hover:border-transparent transition-all duration-300 flex items-center justify-center gap-2 group-hover:shadow-[0_0_20px_rgba(220,38,38,0.4)]">
+    <Ticket size={18} />
+    Get Passes
+  </button>
+</a>
+      </div>
+    </motion.div>
+  );
+};
+
+
