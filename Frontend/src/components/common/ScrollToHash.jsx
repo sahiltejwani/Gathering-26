@@ -19,6 +19,12 @@ const ScrollToHash = () => {
         }
       }, 100);
     }
+    
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "auto", // keep instant for page change
+    });
   }, [hash, pathname, navigate]);
 
   return null;
