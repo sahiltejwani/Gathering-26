@@ -15,7 +15,7 @@ const DEFAULTS = {
   maxVerticalRotationDeg: 5,
   dragSensitivity: 20,
   enlargeTransitionMs: 300,
-  segments: 35
+  segments: 40
 };
 
 const clamp = (v, min, max) => Math.min(Math.max(v, min), max);
@@ -520,55 +520,55 @@ main.sphere-main {
     [dragDampening, maxVerticalRotationDeg, stopInertia]
   );
 
-  useGesture(
-    {
-      onDragStart: ({ event }) => {
-        if (focusedElRef.current) return;
-        stopInertia();
-        const evt = event;
-        draggingRef.current = true;
-        movedRef.current = false;
-        startRotRef.current = { ...rotationRef.current };
-        startPosRef.current = { x: evt.clientX, y: evt.clientY };
-      },
-      onDrag: ({ event, last, velocity = [0, 0], direction = [0, 0], movement }) => {
-        if (focusedElRef.current || !draggingRef.current || !startPosRef.current) return;
-        const evt = event;
-        const dxTotal = evt.clientX - startPosRef.current.x;
-               const dyTotal = evt.clientY - startPosRef.current.y;
-        if (!movedRef.current) {
-          const dist2 = dxTotal * dxTotal + dyTotal * dyTotal;
-          if (dist2 > 16) movedRef.current = true;
-        }
-        const nextX = clamp(
-          startRotRef.current.x - dyTotal / dragSensitivity,
-          -maxVerticalRotationDeg,
-          maxVerticalRotationDeg
-        );
-        const nextY = wrapAngleSigned(startRotRef.current.y + dxTotal / dragSensitivity);
-        if (rotationRef.current.x !== nextX || rotationRef.current.y !== nextY) {
-          rotationRef.current = { x: nextX, y: nextY };
-          applyTransform(nextX, nextY);
-        }
-        if (last) {
-          draggingRef.current = false;
-          let [vMagX, vMagY] = velocity;
-          const [dirX, dirY] = direction;
-          let vx = vMagX * dirX;
-          let vy = vMagY * dirY;
-          if (Math.abs(vx) < 0.001 && Math.abs(vy) < 0.001 && Array.isArray(movement)) {
-            const [mx, my] = movement;
-            vx = clamp((mx / dragSensitivity) * 0.02, -1.2, 1.2);
-            vy = clamp((my / dragSensitivity) * 0.02, -1.2, 1.2);
-          }
-          if (Math.abs(vx) > 0.005 || Math.abs(vy) > 0.005) startInertia(vx, vy);
-          if (movedRef.current) lastDragEndAt.current = performance.now();
-          movedRef.current = false;
-        }
-      }
-    },
-    { target: mainRef, eventOptions: { passive: true } }
-  );
+  // useGesture(
+  //   {
+  //     onDragStart: ({ event }) => {
+  //       if (focusedElRef.current) return;
+  //       stopInertia();
+  //       const evt = event;
+  //       draggingRef.current = true;
+  //       movedRef.current = false;
+  //       startRotRef.current = { ...rotationRef.current };
+  //       startPosRef.current = { x: evt.clientX, y: evt.clientY };
+  //     },
+  //     onDrag: ({ event, last, velocity = [0, 0], direction = [0, 0], movement }) => {
+  //       if (focusedElRef.current || !draggingRef.current || !startPosRef.current) return;
+  //       const evt = event;
+  //       const dxTotal = evt.clientX - startPosRef.current.x;
+  //              const dyTotal = evt.clientY - startPosRef.current.y;
+  //       if (!movedRef.current) {
+  //         const dist2 = dxTotal * dxTotal + dyTotal * dyTotal;
+  //         if (dist2 > 16) movedRef.current = true;
+  //       }
+  //       const nextX = clamp(
+  //         startRotRef.current.x - dyTotal / dragSensitivity,
+  //         -maxVerticalRotationDeg,
+  //         maxVerticalRotationDeg
+  //       );
+  //       const nextY = wrapAngleSigned(startRotRef.current.y + dxTotal / dragSensitivity);
+  //       if (rotationRef.current.x !== nextX || rotationRef.current.y !== nextY) {
+  //         rotationRef.current = { x: nextX, y: nextY };
+  //         applyTransform(nextX, nextY);
+  //       }
+  //       if (last) {
+  //         draggingRef.current = false;
+  //         let [vMagX, vMagY] = velocity;
+  //         const [dirX, dirY] = direction;
+  //         let vx = vMagX * dirX;
+  //         let vy = vMagY * dirY;
+  //         if (Math.abs(vx) < 0.001 && Math.abs(vy) < 0.001 && Array.isArray(movement)) {
+  //           const [mx, my] = movement;
+  //           vx = clamp((mx / dragSensitivity) * 0.02, -1.2, 1.2);
+  //           vy = clamp((my / dragSensitivity) * 0.02, -1.2, 1.2);
+  //         }
+  //         if (Math.abs(vx) > 0.005 || Math.abs(vy) > 0.005) startInertia(vx, vy);
+  //         if (movedRef.current) lastDragEndAt.current = performance.now();
+  //         movedRef.current = false;
+  //       }
+  //     }
+  //   },
+  //   { target: mainRef, eventOptions: { passive: true } }
+  // );
 
   useEffect(() => {
     const scrim = scrimRef.current;
