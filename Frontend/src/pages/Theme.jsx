@@ -99,12 +99,11 @@ const Theme = () => {
           </div>
 
           <p className="text-gray-300 text-sm md:text-xl leading-relaxed">
-            "From the spark of tradition to the roar of celebration.
-            This year, we don’t just celebrate joy — we <b className="text-white">ignite</b> it."
+              An evening where cultures blend, talents shine, and the campus comes alive —
+celebrating diversity, creativity, and the joy of coming together as one
           </p>
         </motion.div>
       </div>
-
       {/* Floating Embers */}
       <FloatingEmbers />
     </div>
