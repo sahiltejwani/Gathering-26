@@ -3,7 +3,7 @@
 export const passes = [
   {
     name: "Musical Night",
-    venue: "Main Auditorium",
+    venue: "Infront of Natu building",
     desc: "An electrifying night filled with live bands, soulful music, and high-energy performances that bring the gathering alive.",
     image: "/images/events/musicalnight.jpg",
   },
@@ -21,7 +21,7 @@ export const passes = [
   },
   {
     name: "Refreshment",
-    venue: "Main Auditorium",
+    venue: "Infront of ENTC Extention",
     desc: "A dedicated refreshment area offering a wide range of food and beverages to keep the energy high throughout the event.",
     image: "/images/events/refreshment.jpeg",
   },
