@@ -1,0 +1,240 @@
+const teamData = [
+  {
+    title: "Show Flow Manager",
+    members: [
+      {
+        image: "/images/team/mangesh_patil.jpg",
+        name: "Mangesh Patil",
+        role: "Incharge",
+        instagram: "https://www.instagram.com/mangeshpatil03?igsh=NWt4ZzY4cHE5aGd3",
+        linkedin:
+          "https://www.linkedin.com/in/mangesh-patil-7b8b2330b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+      }
+    ]
+  },
+
+  {
+    title: "Accounts and Audit",
+    members: [
+      {
+        image: "",
+        name: "Aditya Chavan",
+        role: "Head",
+        instagram: "",
+        linkedin: ""
+      },
+      {
+        image: "/images/team/mehar_reghatate.jpg",
+        name: "Mehar Raghatate",
+        role: "Head",
+        instagram:
+          "https://www.instagram.com/mehar_raghatate_?igsh=ejJkd3dubXVjaXNw",
+        linkedin: "https://www.linkedin.com/in/mehar-raghatate-57880b299"
+      }
+    ]
+  },
+
+  {
+    title: "Crowd and Safety",
+    members: [
+      {
+        image: "",
+        name: "Omkar Borkar",
+        role: "Head",
+        instagram: "",
+        linkedin: ""
+      },
+      {
+        image: "/images/team/adarsh.jpg",
+        name: "Adarsh Nalawade",
+        role: "Head",
+        instagram: "",
+        linkedin:
+          "https://www.linkedin.com/in/adarsh-nalawade-293b71313?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+      }
+    ]
+  },
+
+  {
+    title: "Finance and Corporate",
+    members: [
+      {
+        image: "/images/team/om_patil.jpg",
+        name: "Om Patil",
+        role: "Head",
+        instagram: "https://www.instagram.com/ompatil_17_?igsh=bGVvcDBwbXQyeWZx",
+        linkedin:
+          "https://www.linkedin.com/in/om-patil-76b0252ab?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+      },
+      {
+        image: "/images/team/abhinav_suryavanshi.jpeg",
+        name: "Abhinav Suryavanshi",
+        role: "Head",
+        instagram:
+          "https://www.instagram.com/abhinavsuryavanshi007?igsh=MWZkMTRmNXY3bDhmeA==",
+        linkedin:
+          "https://www.linkedin.com/in/abhinav-suryavanshi-748a06291?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+      }
+    ]
+  },
+
+  {
+    title: "Decor",
+    members: [
+      {
+        image: "",
+        name: "Supriya Khandare",
+        role: "Head",
+        instagram: "",
+        linkedin: ""
+      },
+      {
+        image: "",
+        name: "Rhutvik Madake",
+        role: "Head",
+        instagram: "",
+        linkedin: ""
+      }
+    ]
+  },
+
+  {
+    title: "Documentation",
+    members: [
+      {
+        image: "/images/team/Mrunal_targe.jpg",
+        name: "Mrunal Targe",
+        role: "Head",
+        instagram: "https://www.instagram.com/mrunal_7007?igsh=MW8xZW9jZmhpa21kaA==",
+        linkedin: "https://www.linkedin.com/in/mrunal1016/"
+      },
+      {
+        image: "",
+        name: "Samradnya Kale",
+        role: "Head",
+        instagram: "",
+        linkedin: ""
+      }
+    ]
+  },
+
+  {
+    title: "ESM Incharge",
+    members: [
+      {
+        image: "/images/team/ajay_kharade.jpg",
+        name: "Ajay Karhade",
+        role: "Head",
+        instagram: "https://www.instagram.com/ajju_0503?igsh=MXA2cXg4OGo4bTluNQ==",
+        linkedin:
+          "https://www.linkedin.com/in/ajay-karhade-560b77294?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+      }
+    ]
+  },
+
+  {
+    title: "Infrastructure Incharge",
+    members: [
+      {
+        image: "/images/team/Atharva_gs.jpg",
+        name: "Atharva Salunkhe",
+        role: "Head",
+        instagram: "https://www.instagram.com/atharv_7.1?igsh=MWs4MXd0YjYydmJ2dQ==",
+        linkedin: "https://www.linkedin.com/in/atharv-salunkhe-coep"
+      },
+      {
+        image: "/images/team/Piyush_joshi.jpg",
+        name: "Vishwambhar Joshi",
+        role: "Head",
+        instagram: "https://www.instagram.com/j.vishwambhar?igsh=dGZvdXc3YXludzcy",
+        linkedin:
+          "https://www.linkedin.com/in/vishwambhar-joshi-967533351?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+      }
+    ]
+  },
+
+  {
+    title: "Gathering Championship",
+    members: [
+      {
+        image: "",
+        name: "Sanskruti Patil",
+        role: "Head",
+        instagram: "",
+        linkedin: ""
+      },
+      {
+        image: "/images/team/suyash_dabhade.jpg",
+        name: "Suyash Dabhade",
+        role: "Head",
+        instagram:
+          "https://www.instagram.com/suyash_dabhade_612?igsh=MTlhdXdkMXFsMXV0eQ==",
+        linkedin: "https://www.linkedin.com/in/suyash-dabhade-a3569521b"
+      }
+    ]
+  },
+
+  {
+    title: "Design",
+    members: [
+      {
+        image: "",
+        name: "Ashutosh Gudnawar",
+        role: "Head",
+        instagram: "",
+        linkedin: ""
+      },
+      {
+        image: "/images/team/Swarnika_karale.jpg",
+        name: "Swarnika Karale",
+        role: "Head",
+        instagram: "https://www.instagram.com/swarnikaa07?igsh=ZHRlMzlrenVndXVn",
+        linkedin:
+          "https://www.linkedin.com/in/swarnika-karale-338442316?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+      }
+    ]
+  },
+
+  {
+    title: "Media",
+    members: [
+      {
+        image: "",
+        name: "Rohan Ghuge",
+        role: "Head",
+        instagram: "",
+        linkedin: ""
+      },
+      {
+        image: "/images/team/Vedant_Hankare.jpg",
+        name: "Vedant Hankare",
+        role: "Head",
+        instagram:
+          "https://www.instagram.com/vedant_hankare?igsh=MWw5ZWVnNjgxNTNocQ==",
+        linkedin: "https://www.linkedin.com/in/vedant-hankare"
+      }
+    ]
+  },
+
+  {
+    title: "WEB",
+    members: [
+      {
+        image: "/",
+        name: "Sahil Tejwani",
+        role: "Head",
+        instagram: "",
+        linkedin: ""
+      },
+      {
+        image: "/images/team/yash_marke.jpeg",
+        name: "Yash Marke",
+        role: "Head",
+        instagram: "https://www.instagram.com/accounts/login/?hl=en",
+        linkedin: "https://www.linkedin.com/feed/"
+      }
+    ]
+  }
+];
+
+export default teamData;

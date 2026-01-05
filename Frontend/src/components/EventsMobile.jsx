@@ -107,14 +107,14 @@ const EventsMobile = () => {
 
             {/* TEXT CONTENT */}
             <div className="absolute bottom-0 left-0 w-full p-5 bg-gradient-to-t from-black via-black/80 to-transparent">
-              <div className="flex gap-3 mb-2">
+              {/* <div className="flex gap-3 mb-2">
                 <span className="text-xs bg-black/50 px-3 py-1 rounded-full text-white flex items-center gap-1">
                   <Clock size={12} /> 7:00 PM
                 </span>
                 <span className="text-xs bg-black/50 px-3 py-1 rounded-full text-white flex items-center gap-1">
                   <MapPin size={12} /> Main Stage
                 </span>
-              </div>
+              </div> */}
 
               <h2 className="text-2xl font-bold text-white mb-2">
                 {activeEvent.text}
