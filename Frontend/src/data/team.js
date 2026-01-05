@@ -194,28 +194,130 @@ const teamData = [
       }
     ]
   },
-
   {
-    title: "Media",
-    members: [
-      {
-        image: "",
-        name: "Rohan Ghuge",
-        role: "Head",
-        instagram: "",
-        linkedin: ""
+        "title": "Media",
+        "members": [
+          {
+            "image": "",
+            "name": "Rohan Ghuge",
+            "role": "Head",
+            "instagram": "",
+            "linkedin": ""
+          },
+          {
+            "image": "/images/team/Vedant_Hankare.jpg",
+            "name": "Vedant Hankare",
+            "role": "Head", 
+            "instagram": "https://www.instagram.com/vedant_hankare?igsh=MWw5ZWVnNjgxNTNocQ==",
+            "linkedin": "https://www.linkedin.com/in/vedant-hankare"
+          }
+        ]
       },
       {
-        image: "/images/team/Vedant_Hankare.jpg",
-        name: "Vedant Hankare",
-        role: "Head",
-        instagram:
-          "https://www.instagram.com/vedant_hankare?igsh=MWw5ZWVnNjgxNTNocQ==",
-        linkedin: "https://www.linkedin.com/in/vedant-hankare"
-      }
-    ]
-  },
-
+        "title": "Musical Night Incharge",
+        "members": [
+          {
+            "image": "/images/team/Viraj_patil.jpg",
+            "name": "Viraj Patil",
+            "role": "Head",
+            "instagram": "https://www.instagram.com/__viraj__1307__?igsh=OGE3NHhiYjdudndh",
+            "linkedin": "https://www.linkedin.com/in/virajpatil1307"
+          }
+        ]
+      },
+      {
+        "title": "Public Relation",
+        "members": [
+          {
+            "image": "/images/team/Mayur_lokhande.jpg",
+            "name": "Mayur Lokhande",
+            "role": "Head",
+            "instagram": "https://www.instagram.com/lokhandemayur01?igsh=MW03NHFlYWVyajlrYw==",
+            "linkedin": "https://www.linkedin.com/in/mayur-lokhande-0b16a2294?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+          },
+          {
+            "image": "/images/team/Suyog_bhokare.png",
+            "name": "Suyog Bhokare",
+            "role": "Head", 
+            "instagram": "https://www.instagram.com/bhokare_suyog?igsh=MWNvdXVxc2V3NG91ZA== ",
+            "linkedin": "https://www.linkedin.com/in/suyogbhokare?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+          }
+        ]
+      },
+      {
+        "title": "Purchase",
+        "members": [
+          {
+            "image": "",
+            "name": "Viraj Mohite",
+            "role": "Head",
+            "instagram": "",
+            "linkedin": ""
+          }
+        ]
+      },
+      {
+        "title": "Refreshment",
+        "members": [
+          {
+            "image": "",
+            "name": "Dhananjay Gaikwad",
+            "role": "Head",
+            "instagram": "",
+            "linkedin": ""
+          }
+        ]
+      },
+      {
+        "title": "Stage Management",
+        "members": [
+          {
+            "image": "/images/team/Tanisha_gavade.jpg",
+            "name": "Tanisha Gavade",
+            "role": "Head",
+            "instagram": "https://www.instagram.com/",
+            "linkedin": "https://www.linkedin.com/"
+          },
+          {
+            "image": "/images/team/umaranand_vaibhav.jpg",
+            "name": "Varad Umardand",
+            "role": "Head", 
+            "instagram": "https://www.instagram.com/varad_2655?igsh=MXI0c2gxMDBvNWlpcA==",
+            "linkedin": "https://www.linkedin.com/in/varad-umardand-786168292"
+          }
+        ]
+      },
+      {
+        "title": "Traditional Day Incharge",
+        "members": [
+          {
+            "image": "/images/team/Ruddhi_khade.jpg",
+            "name": "Ruddhi Khade",
+            "role": "Head",
+            "instagram": "https://www.instagram.com/ruddhi.7?igsh=MThwczN6czJ3d2hrYg==",
+            "linkedin": "https://in.linkedin.com/in/ruddhi-khade-662235256"
+          }
+        ]
+      },
+      {
+        "title": "Videography and Photography",
+        "members": [
+          {
+            "image": "/images/team/tanmay_wagh.jpg",
+            "name": "Tanmay Wagh",
+            "role": "Head",
+            "instagram": "http://www.instagram.com/_tanmaywagh/",
+            "linkedin": "http://www.linkedin.com/in/tanmay-wagh-a5b5152aa/"
+          },
+          {
+            "image": "/images/team/gourav_dhavane.jpg",
+            "name": "Gaurav Dhavane",
+            "role": "Head",
+            "instagram": "https://www.instagram.com/gordey_0110?igsh=MTllbXFyYjQ5Z3hzaw==",
+            "linkedin": "https://www.instagram.com/gordey_0110?igsh=MTllbXFyYjQ5Z3hzaw=="
+          }
+        ]
+      },  
   {
     title: "WEB",
     members: [
