@@ -225,8 +225,8 @@ const Home = () => {
         onEnded={handleVideoEnd}
         className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none"
       >
-        <source src="/curtains.mp4" type="video/mp4" />
-        <source src="/curtains.webm" type="video/webm" />
+        <source src="https://res.cloudinary.com/didcdkvu7/video/upload/v1767688517/curtains_pumrrh.mp4" type="video/mp4" />
+        <source src="https://res.cloudinary.com/didcdkvu7/video/upload/v1767688517/curtains_pumrrh.mp4" type="video/webm" />
       </video>
     </div>
   );

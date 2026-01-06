@@ -115,24 +115,11 @@ const TeamsSection = () => {
   return (
     <div
   className="relative min-h-[100svh] overflow-hidden bg-fixed bg-no-repeat bg-cover bg-center"
-  // className="relative min-h-[100svh] bg-fixed bg-cover bg-center"
-  // style={{
-  //   backgroundImage: "url('/images/team/background_teampage.webp')",
-  // }}
 >
   <div className="absolute inset-0 bg-black/90" />
 
       {/* Header */}
       <div className="mt-20 mb-12 text-center text-white uppercase drop-shadow-md font-paperHeader">
-        <p
-          className="text-[2em] font-extrabold"
-          style={{
-            WebkitTextStroke: '0.01px black',
-            textShadow: '2px 2px 2px black'
-          }}
-        >
-          9th EDITION
-        </p>
         <p
           className="text-5xl font-extrabold tracking-wider"
           style={{

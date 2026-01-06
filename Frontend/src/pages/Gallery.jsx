@@ -1,15 +1,11 @@
 import { useEffect, useState } from "react";
 import DomeGallery from "../components/DomeGallery";
 import GalleryMobile from "../components/GalleryMobile";
+import { galleryImages } from "../data/gallery";
 
 export default function Gallery() {
   const [isMobile, setIsMobile] = useState(false);
-    const TOTAL_IMAGES = 28;
-
-  const DEFAULT_IMAGES = Array.from({ length: TOTAL_IMAGES }, (_, i) => ({
-    src: `https://raw.githubusercontent.com/YashMarke130105/gathering-assets2026/main/gal-${i + 1}.jpg`,
-    alt: `Gallery image ${i + 1}`,
-  }));
+  
   useEffect(() => {
     const media = window.matchMedia("(max-width: 768px)");
 
@@ -46,7 +42,7 @@ export default function Gallery() {
         background: "#000",
       }}
     >
-      <DomeGallery DEFAULT_IMAGES={DEFAULT_IMAGES} grayscale={false} />
+      <DomeGallery images={galleryImages} grayscale={false} />
     </div>
   );
 }
