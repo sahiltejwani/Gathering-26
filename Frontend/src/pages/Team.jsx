@@ -116,15 +116,15 @@ const TeamsSection = () => {
     <div
   className="relative min-h-[100svh] overflow-hidden bg-fixed bg-no-repeat bg-cover bg-center"
   // className="relative min-h-[100svh] bg-fixed bg-cover bg-center"
-  // style={{
-  //   backgroundImage: "url('/images/team/background_teampage.webp')",
-  // }}
+   style={{
+     backgroundImage: "url('/images/team/back_image.webp')",
+   }}
 >
-  <div className="absolute inset-0 bg-black/90" />
+  <div className="absolute inset-0 bg-black/10" />
 
       {/* Header */}
       <div className="mt-20 mb-12 text-center text-white uppercase drop-shadow-md font-paperHeader">
-        <p
+        {/* <p
           className="text-[2em] font-extrabold"
           style={{
             WebkitTextStroke: '0.01px black',
@@ -132,7 +132,7 @@ const TeamsSection = () => {
           }}
         >
           9th EDITION
-        </p>
+        </p> */}
         <p
           className="text-5xl font-extrabold tracking-wider"
           style={{

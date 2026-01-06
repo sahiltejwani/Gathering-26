@@ -1,5 +1,63 @@
 const teamData = [
   {
+    title: "Secretary",
+    members: [
+      {
+        image: "/images/team/Dummy_human.png",
+        name: "Laksh Chajed",
+        role: "",
+        instagram: "",
+        linkedin:
+          ""
+      }
+    ]
+  },
+  {
+    title: "ESM Incharge",
+    members: [
+      {
+        image: "/images/team/ajay_kharade.jpg",
+        name: "Ajay Karhade",
+        role: "Head",
+        instagram: "https://www.instagram.com/ajju_0503?igsh=MXA2cXg4OGo4bTluNQ==",
+        linkedin:
+          "https://www.linkedin.com/in/ajay-karhade-560b77294?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+      }
+    ]
+  },
+  {
+    title: "Infrastructure Incharge",
+    members: [
+      {
+        image: "/images/team/Atharva_gs.jpg",
+        name: "Atharva Salunkhe",
+        role: "Head",
+        instagram: "https://www.instagram.com/atharv_7.1?igsh=MWs4MXd0YjYydmJ2dQ==",
+        linkedin: "https://www.linkedin.com/in/atharv-salunkhe-coep"
+      },
+      {
+        image: "/images/team/Piyush_joshi.jpg",
+        name: "Vishwambhar Joshi",
+        role: "Head",
+        instagram: "https://www.instagram.com/j.vishwambhar?igsh=dGZvdXc3YXludzcy",
+        linkedin:
+          "https://www.linkedin.com/in/vishwambhar-joshi-967533351?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+      }
+    ]
+  },
+  {
+        "title": "Traditional Day Incharge",
+        "members": [
+          {
+            "image": "/images/team/Ruddhi_khade.jpg",
+            "name": "Ruddhi Khade",
+            "role": "Head",
+            "instagram": "https://www.instagram.com/ruddhi.7?igsh=MThwczN6czJ3d2hrYg==",
+            "linkedin": "https://in.linkedin.com/in/ruddhi-khade-662235256"
+          }
+        ]
+      },
+  {
     title: "Show Flow Manager",
     members: [
       {
@@ -17,7 +75,7 @@ const teamData = [
     title: "Accounts and Audit",
     members: [
       {
-        image: "",
+        image: "/images/team/Dummy_human.png",
         name: "Aditya Chavan",
         role: "Head",
         instagram: "",
@@ -33,12 +91,31 @@ const teamData = [
       }
     ]
   },
+  {
+    title: "App and WEB",
+    members: [
+      {
+        image: "/images/team/Dummy_human.png",
+        name: "Sahil Tejwani",
+        role: "Head",
+        instagram: "",
+        linkedin: ""
+      },
+      {
+        image: "/images/team/yash_marke.jpeg",
+        name: "Yash Marke",
+        role: "Head",
+        instagram: "https://www.instagram.com/accounts/login/?hl=en",
+        linkedin: "https://www.linkedin.com/feed/"
+      }
+    ]
+  },
 
   {
     title: "Crowd and Safety",
     members: [
       {
-        image: "",
+        image: "/images/team/Dummy_human.png",
         name: "Omkar Borkar",
         role: "Head",
         instagram: "",
@@ -55,6 +132,66 @@ const teamData = [
     ]
   },
 
+
+  {
+    title: "Decor",
+    members: [
+      {
+        image: "/images/team/Dummy_human.png",
+        name: "Supriya Khandare",
+        role: "Head",
+        instagram: "",
+        linkedin: ""
+      },
+      {
+        image: "/images/team/Dummy_human.png",
+        name: "Rhutvik Madake",
+        role: "Head",
+        instagram: "",
+        linkedin: ""
+      }
+    ]
+  },
+  {
+    title: "Design",
+    members: [
+      {
+        image: "/images/team/Dummy_human.png",
+        name: "Ashutosh Gudnawar",
+        role: "Head",
+        instagram: "",
+        linkedin: ""
+      },
+      {
+        image: "/images/team/Swarnika_karale.jpg",
+        name: "Swarnika Karale",
+        role: "Head",
+        instagram: "https://www.instagram.com/swarnikaa07?igsh=ZHRlMzlrenVndXVn",
+        linkedin:
+          "https://www.linkedin.com/in/swarnika-karale-338442316?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+      }
+    ]
+  },
+
+  {
+    title: "Documentation",
+    members: [
+      {
+        image: "/images/team/Mrunal_targe.jpg",
+        name: "Mrunal Targe",
+        role: "Head",
+        instagram: "https://www.instagram.com/mrunal_7007?igsh=MW8xZW9jZmhpa21kaA==",
+        linkedin: "https://www.linkedin.com/in/mrunal1016/"
+      },
+      {
+        image: "/images/team/Dummy_human.png",
+        name: "Samradnya Kale",
+        role: "Head",
+        instagram: "",
+        linkedin: ""
+      }
+    ]
+  },
   {
     title: "Finance and Corporate",
     members: [
@@ -79,85 +216,10 @@ const teamData = [
   },
 
   {
-    title: "Decor",
-    members: [
-      {
-        image: "",
-        name: "Supriya Khandare",
-        role: "Head",
-        instagram: "",
-        linkedin: ""
-      },
-      {
-        image: "",
-        name: "Rhutvik Madake",
-        role: "Head",
-        instagram: "",
-        linkedin: ""
-      }
-    ]
-  },
-
-  {
-    title: "Documentation",
-    members: [
-      {
-        image: "/images/team/Mrunal_targe.jpg",
-        name: "Mrunal Targe",
-        role: "Head",
-        instagram: "https://www.instagram.com/mrunal_7007?igsh=MW8xZW9jZmhpa21kaA==",
-        linkedin: "https://www.linkedin.com/in/mrunal1016/"
-      },
-      {
-        image: "",
-        name: "Samradnya Kale",
-        role: "Head",
-        instagram: "",
-        linkedin: ""
-      }
-    ]
-  },
-
-  {
-    title: "ESM Incharge",
-    members: [
-      {
-        image: "/images/team/ajay_kharade.jpg",
-        name: "Ajay Karhade",
-        role: "Head",
-        instagram: "https://www.instagram.com/ajju_0503?igsh=MXA2cXg4OGo4bTluNQ==",
-        linkedin:
-          "https://www.linkedin.com/in/ajay-karhade-560b77294?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
-      }
-    ]
-  },
-
-  {
-    title: "Infrastructure Incharge",
-    members: [
-      {
-        image: "/images/team/Atharva_gs.jpg",
-        name: "Atharva Salunkhe",
-        role: "Head",
-        instagram: "https://www.instagram.com/atharv_7.1?igsh=MWs4MXd0YjYydmJ2dQ==",
-        linkedin: "https://www.linkedin.com/in/atharv-salunkhe-coep"
-      },
-      {
-        image: "/images/team/Piyush_joshi.jpg",
-        name: "Vishwambhar Joshi",
-        role: "Head",
-        instagram: "https://www.instagram.com/j.vishwambhar?igsh=dGZvdXc3YXludzcy",
-        linkedin:
-          "https://www.linkedin.com/in/vishwambhar-joshi-967533351?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
-      }
-    ]
-  },
-
-  {
     title: "Gathering Championship",
     members: [
       {
-        image: "",
+        image: "/images/team/Dummy_human.png",
         name: "Sanskruti Patil",
         role: "Head",
         instagram: "",
@@ -173,32 +235,11 @@ const teamData = [
       }
     ]
   },
-
-  {
-    title: "Design",
-    members: [
-      {
-        image: "",
-        name: "Ashutosh Gudnawar",
-        role: "Head",
-        instagram: "",
-        linkedin: ""
-      },
-      {
-        image: "/images/team/Swarnika_karale.jpg",
-        name: "Swarnika Karale",
-        role: "Head",
-        instagram: "https://www.instagram.com/swarnikaa07?igsh=ZHRlMzlrenVndXVn",
-        linkedin:
-          "https://www.linkedin.com/in/swarnika-karale-338442316?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
-      }
-    ]
-  },
   {
         "title": "Media",
         "members": [
           {
-            "image": "",
+            "image": "/images/team/Dummy_human.png",
             "name": "Rohan Ghuge",
             "role": "Head",
             "instagram": "",
@@ -248,7 +289,7 @@ const teamData = [
         "title": "Purchase",
         "members": [
           {
-            "image": "",
+            "image": "/images/team/Dummy_human.png",
             "name": "Viraj Mohite",
             "role": "Head",
             "instagram": "",
@@ -260,7 +301,7 @@ const teamData = [
         "title": "Refreshment",
         "members": [
           {
-            "image": "",
+            "image": "/images/team/Dummy_human.png",
             "name": "Dhananjay Gaikwad",
             "role": "Head",
             "instagram": "",
@@ -288,18 +329,6 @@ const teamData = [
         ]
       },
       {
-        "title": "Traditional Day Incharge",
-        "members": [
-          {
-            "image": "/images/team/Ruddhi_khade.jpg",
-            "name": "Ruddhi Khade",
-            "role": "Head",
-            "instagram": "https://www.instagram.com/ruddhi.7?igsh=MThwczN6czJ3d2hrYg==",
-            "linkedin": "https://in.linkedin.com/in/ruddhi-khade-662235256"
-          }
-        ]
-      },
-      {
         "title": "Videography and Photography",
         "members": [
           {
@@ -317,26 +346,7 @@ const teamData = [
             "linkedin": "https://www.instagram.com/gordey_0110?igsh=MTllbXFyYjQ5Z3hzaw=="
           }
         ]
-      },  
-  {
-    title: "WEB",
-    members: [
-      {
-        image: "/",
-        name: "Sahil Tejwani",
-        role: "Head",
-        instagram: "",
-        linkedin: ""
-      },
-      {
-        image: "/images/team/yash_marke.jpeg",
-        name: "Yash Marke",
-        role: "Head",
-        instagram: "https://www.instagram.com/accounts/login/?hl=en",
-        linkedin: "https://www.linkedin.com/feed/"
-      }
-    ]
-  }
+      }  
 ];
 
 export default teamData;

@@ -5,7 +5,7 @@ import Navbar from './components/common/Navbar'
 import Footer from './components/common/Footer'
 import Team from './pages/Team'
 import Passes from './pages/Passes'
-import Gallery from './pages/Visionboard'
+import Gallery from './pages/Gallery'
 import Main from './pages/Main'
 import ScrollToHash from './components/common/ScrollToHash'
 
