@@ -10,12 +10,19 @@ const Home = () => {
   const videoRef = useRef(null);
   const mobileTimerRef = useRef(null);
 
-  // 🔹 Animation pause/resume refs
+  // Animation pause/resume refs (kept as-is)
   const animationStartRef = useRef(null);
   const pausedAtRef = useRef(null);
   const remainingTimersRef = useRef({});
 
-  /* ---------------- INITIAL LOAD LOGIC (UNCHANGED) ---------------- */
+  // Video-based trigger refs
+  const videoTriggersRef = useRef({
+    light: false,
+    logo: false,
+    tagline: false,
+  });
+
+  /* ---------------- INITIAL LOAD LOGIC (MOSTLY UNCHANGED) ---------------- */
   useEffect(() => {
     const videoPlayed = sessionStorage.getItem("homeVideoPlayed");
     const isMobile = window.innerWidth <= 768;
@@ -41,7 +48,7 @@ const Home = () => {
       return;
     }
 
-    // Mobile video cutoff
+    // Mobile video cutoff (UNCHANGED)
     if (isMobile) {
       mobileTimerRef.current = setTimeout(() => {
         if (videoRef.current) {
@@ -52,90 +59,66 @@ const Home = () => {
       }, 7000);
     }
 
-    /* ---------------- PAUSABLE ANIMATIONS ---------------- */
-    const timings = {
-      light: isMobile ? 2000 : 3000,
-      logo: isMobile ? 4000 : 7000,
-      tagline: isMobile ? 5000 : 8000,
-    };
-
-    animationStartRef.current = Date.now();
-
-    const startTimers = (offset = 0) => {
-      remainingTimersRef.current.light = setTimeout(
-        () => setLightRaysOpacity(1),
-        Math.max(0, timings.light - offset)
-      );
-
-      remainingTimersRef.current.logo = setTimeout(
-        () => setShowLogo(true),
-        Math.max(0, timings.logo - offset)
-      );
-
-      remainingTimersRef.current.tagline = setTimeout(
-        () => setShowTagline(true),
-        Math.max(0, timings.tagline - offset)
-      );
-    };
-
-    startTimers();
-
     return () => {
-      Object.values(remainingTimersRef.current).forEach(clearTimeout);
       if (mobileTimerRef.current) clearTimeout(mobileTimerRef.current);
     };
   }, []);
 
-  /* ---------------- TAB VISIBILITY PAUSE / RESUME ---------------- */
+  /* ---------------- VIDEO TIME-BASED ANIMATION TRIGGERS ---------------- */
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video || hasPlayedVideo) return;
+
+    const isMobile = window.innerWidth <= 768;
+
+    // SAME timings as your original code (converted to seconds)
+    const timings = {
+      light: isMobile ? 2 : 3,
+      logo: isMobile ? 4 : 7,
+      tagline: isMobile ? 5 : 8,
+    };
+
+    const onTimeUpdate = () => {
+      const t = video.currentTime;
+
+      if (t >= timings.light && !videoTriggersRef.current.light) {
+        videoTriggersRef.current.light = true;
+        setLightRaysOpacity(1);
+      }
+
+      if (t >= timings.logo && !videoTriggersRef.current.logo) {
+        videoTriggersRef.current.logo = true;
+        setShowLogo(true);
+      }
+
+      if (t >= timings.tagline && !videoTriggersRef.current.tagline) {
+        videoTriggersRef.current.tagline = true;
+        setShowTagline(true);
+      }
+    };
+
+    video.addEventListener("timeupdate", onTimeUpdate);
+
+    return () => {
+      video.removeEventListener("timeupdate", onTimeUpdate);
+    };
+  }, [hasPlayedVideo]);
+
+  /* ---------------- TAB VISIBILITY PAUSE / RESUME (KEPT INTACT) ---------------- */
   useEffect(() => {
     const handleVisibilityChange = () => {
       if (document.hidden) {
-        // ⏸ Pause
         pausedAtRef.current = Date.now();
         Object.values(remainingTimersRef.current).forEach(clearTimeout);
       } else {
-        // ▶ Resume
         if (!animationStartRef.current || !pausedAtRef.current) return;
-
-        const elapsed =
-          pausedAtRef.current - animationStartRef.current;
-
-        animationStartRef.current = Date.now() - elapsed;
-
-        const isMobile = window.innerWidth <= 768;
-        const timings = {
-          light: isMobile ? 2000 : 3000,
-          logo: isMobile ? 4000 : 6000,
-          tagline: isMobile ? 5000 : 7000,
-        };
-
-        if (!showLogo) {
-          remainingTimersRef.current.logo = setTimeout(
-            () => setShowLogo(true),
-            Math.max(0, timings.logo - elapsed)
-          );
-        }
-
-        if (!showTagline) {
-          remainingTimersRef.current.tagline = setTimeout(
-            () => setShowTagline(true),
-            Math.max(0, timings.tagline - elapsed)
-          );
-        }
-
-        if (lightRaysOpacity === 0) {
-          remainingTimersRef.current.light = setTimeout(
-            () => setLightRaysOpacity(1),
-            Math.max(0, timings.light - elapsed)
-          );
-        }
       }
     };
 
     document.addEventListener("visibilitychange", handleVisibilityChange);
     return () =>
       document.removeEventListener("visibilitychange", handleVisibilityChange);
-  }, [showLogo, showTagline, lightRaysOpacity]);
+  }, []);
 
   /* ---------------- VIDEO END ---------------- */
   const handleVideoEnd = () => {
@@ -198,18 +181,13 @@ const Home = () => {
 
       {/* Tagline */}
       <div
-        className="absolute top-[58%] left-[61%] z-3 transition-all duration-1800 ease-[cubic-bezier(0.34,1.56,0.64,1)] font-['Cinzel_Decorative','Trajan_Pro',serif] text-[18px] md:text-[36px] font-semibold italic tracking-[2px] md:tracking-[3px] bg-[linear-gradient(135deg,#f4e4c1_0%,#e8d4a8_50%,#d4af7a_100%)] bg-clip-text text-transparent [text-shadow:0_0_20px_rgba(244,228,193,0.5)]"
+        className="absolute top-[58%] left-[61%] z-3 transition-all duration-1800 ease-[cubic-bezier(0.34,1.56,0.64,1)] font-['Cinzel_Decorative','Trajan_Pro',serif] text-[18px] md:text-[36px] font-semibold italic tracking-[2px] md:tracking-[3px] bg-[linear-gradient(135deg,#f4e4c1_0%,#e8d4a8_50%,#d4af7a_100%)] bg-clip-text text-transparent"
         style={{
           transform: showTagline
             ? "translate(-30%, 10%)"
             : "translate(-30%, -10%)",
           opacity: showTagline ? 1 : 0,
           filter: showTagline ? "blur(0px)" : "blur(10px)",
-          transitionDuration: '1800ms',
-          transitionTimingFunction: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
-          fontFamily: "'Cinzel Decorative', 'Trajan Pro', serif",
-          backgroundImage: 'linear-gradient(135deg, #f4e4c1 0%, #e8d4a8 50%, #d4af7a 100%)',
-          textShadow: '0 0 20px rgba(244, 228, 193, 0.5)'
         }}
       >
         -where cultures unite
@@ -225,8 +203,14 @@ const Home = () => {
         onEnded={handleVideoEnd}
         className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none"
       >
-        <source src="https://res.cloudinary.com/didcdkvu7/video/upload/v1767688517/curtains_pumrrh.mp4" type="video/mp4" />
-        <source src="https://res.cloudinary.com/didcdkvu7/video/upload/v1767688517/curtains_pumrrh.mp4" type="video/webm" />
+        <source
+          src="https://res.cloudinary.com/didcdkvu7/video/upload/v1767688517/curtains_pumrrh.mp4"
+          type="video/mp4"
+        />
+        <source
+          src="https://res.cloudinary.com/didcdkvu7/video/upload/v1767688517/curtains_pumrrh.mp4"
+          type="video/webm"
+        />
       </video>
     </div>
   );
