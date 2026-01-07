@@ -329,7 +329,7 @@ const teamData = [
     title: "WEB",
     members: [
       {
-        image: "https://res.cloudinary.com/dism7dfap/image/upload/v1767727759/Logo_aqbsiv.png", 
+        image: "https://res.cloudinary.com/dism7dfap/image/upload/v1767728048/sahil_images_kjx1zg.jpg", 
         name: "Sahil Tejwani",
         role: "Head",
         instagram: "https://www.instagram.com/_sahil_tejwani/",
