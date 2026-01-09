@@ -78,10 +78,10 @@ const EventCard = ({ event, index }) => {
         
         {/* Info Row */}
         <div className="flex items-center gap-4 text-sm text-gray-400 mb-4">
-          <div className="flex items-center gap-1.5">
+          {/* <div className="flex items-center gap-1.5">
             <Clock size={16} className="text-orange-500" />
             <span>{event.time}</span>
-          </div>
+          </div> */}
           <div className="flex items-center gap-1.5">
             <MapPin size={16} className="text-orange-500" />
             <span>{event.venue}</span>
