@@ -33,14 +33,24 @@ const teamData = [
   },
 
   {
-    title: "Infrastructure Incharge", members: [
+    title: "Traditional Day Incharge", members: [
       {
-        image: `${CLOUD_ROOT}/Atharva_gs_wuubj5.jpg`, name: "Atharva Salunkhe", role: "Incharge",
+        image: `${CLOUD_ROOT}/Ruddhi_khade_zml1ws.jpg`, name: "Ruddhi Khade", role: "Incharge",
+        instagram: "https://www.instagram.com/ruddhi.7?igsh=MThwczN6czJ3d2hrYg==",
+        linkedin: "https://in.linkedin.com/in/ruddhi-khade-662235256"
+      }
+    ]
+  },
+
+  {
+    title: "Infrastructure", members: [
+      {
+        image: `${CLOUD_ROOT}/Atharva_gs_wuubj5.jpg`, name: "Atharva Salunkhe", role: "Head",
         instagram: "https://www.instagram.com/atharv_7.1?igsh=MWs4MXd0YjYydmJ2dQ==",
         linkedin: "https://www.linkedin.com/in/atharv-salunkhe-coep"
       },
       {
-        image: `${CLOUD_ROOT}/Piyush_joshi_fuykfy.jpg`, name: "Vishwambhar Joshi", role: "Incharge",
+        image: `${CLOUD_ROOT}/Piyush_joshi_fuykfy.jpg`, name: "Vishwambhar Joshi", role: "Head",
         instagram: "https://www.instagram.com/j.vishwambhar?igsh=dGZvdXc3YXludzcy",
         linkedin: "https://www.linkedin.com/in/vishwambhar-joshi-967533351"
       }
@@ -48,21 +58,11 @@ const teamData = [
   },
 
   {
-    title: "ESM Incharge", members: [
+    title: "ESM", members: [
       {
-        image: `${CLOUD_ROOT}/ajay_kharade_u9m2hr.jpg`, name: "Ajay Karhade", role: "Incharge",
+        image: `${CLOUD_ROOT}/ajay_kharade_u9m2hr.jpg`, name: "Ajay Karhade", role: "Head",
         instagram: "https://www.instagram.com/ajju_0503?igsh=MXA2cXg4OGo4bTluNQ==",
         linkedin: "https://www.linkedin.com/in/ajay-karhade-560b77294"
-      }
-    ]
-  },
-
-  {
-    title: "Traditional Day Incharge", members: [
-      {
-        image: `${CLOUD_ROOT}/Ruddhi_khade_zml1ws.jpg`, name: "Ruddhi Khade", role: "Incharge",
-        instagram: "https://www.instagram.com/ruddhi.7?igsh=MThwczN6czJ3d2hrYg==",
-        linkedin: "https://in.linkedin.com/in/ruddhi-khade-662235256"
       }
     ]
   },
