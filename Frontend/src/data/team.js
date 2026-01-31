@@ -70,7 +70,7 @@ const teamData = [
   {
     title: "Documentation", members: [
       {
-        image: `${CLOUD_ROOT}/Mrunal_targe_ntd7m7.jpg`, name: "Mrunal Targe", role: "Head",
+        image: `https://res.cloudinary.com/dqyubiz60/image/upload/v1769881433/WhatsApp_Image_2026-01-31_at_11.11.00_PM_lx2y7a.jpg`, name: "Mrunal Targe", role: "Head",
         instagram: "https://www.instagram.com/mrunal_7007?igsh=MW8xZW9jZmhpa21kaA==",
         linkedin: "https://www.linkedin.com/in/mrunal1016/"
       },
@@ -104,7 +104,7 @@ const teamData = [
         linkedin: "https://www.linkedin.com/in/sahil-tejwani-0ba938289/"
       },
       {
-        image: `${CLOUD_ROOT}/yash_marke_xfkoh9.jpg`, name: "Yash Marke", role: "Head",
+        image: `https://res.cloudinary.com/dqyubiz60/image/upload/v1769881295/WhatsApp_Image_2026-01-31_at_11.07.55_PM_ljbars.jpg`, name: "Yash Marke", role: "Head",
         instagram: "https://www.instagram.com/accounts/login/?hl=en",
         linkedin: "https://www.linkedin.com/feed/"
       }
