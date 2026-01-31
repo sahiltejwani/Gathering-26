@@ -119,7 +119,7 @@ const TeamCard = ({ image, name, role, instagram, linkedin }) => {
           ) : (
             <div className="absolute inset-0 flex flex-col items-center justify-center bg-zinc-900">
               <User size={64} className="text-zinc-700 mb-2" />
-              <span className="text-zinc-600 text-xs tracking-widest uppercase">No Image</span>
+              {/* <span className="text-zinc-600 text-xs tracking-widest uppercase">No Image</span> */}
             </div>
           )}
         </div>
